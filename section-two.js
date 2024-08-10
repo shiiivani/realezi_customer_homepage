@@ -28,15 +28,23 @@ document.addEventListener("DOMContentLoaded", function () {
       arrowIcon.classList.remove("rotate");
     }
   });
-
   const minSlider = document.getElementById("minSlider");
   const maxSlider = document.getElementById("maxSlider");
   const minValueDisplay = document.getElementById("minValue");
   const maxValueDisplay = document.getElementById("maxValue");
 
+  // Convert the slider value to the corresponding amount
+  function convertToAmount(value) {
+    if (value <= 100) {
+      return `Rs.${value} Lakh`; // 1 to 100 Lakhs
+    } else {
+      return `Rs.${(value / 100).toFixed(1)} Crore`; // 1 to 5 Crores
+    }
+  }
+
   function updateSliderValues() {
-    minValueDisplay.textContent = `Rs.${minSlider.value}Lakh`;
-    maxValueDisplay.textContent = `Rs.${maxSlider.value}Lakh`;
+    minValueDisplay.textContent = convertToAmount(minSlider.value);
+    maxValueDisplay.textContent = convertToAmount(maxSlider.value);
   }
 
   minSlider.addEventListener("input", function () {
