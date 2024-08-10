@@ -37,19 +37,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
     // Handle non-looping videos
     if (!isLoopingVideo) {
-      function onEnd() {
-        if (index === 1) {
-          playVideo(1);
-        } else if (index === 2) {
-          playVideo(3); // Switch to main~2(2) on loop after main~2.mp4 ends
-        } else if (index === 4) {
-          playVideo(5); // Switch to main~3(3) on loop after main~3.mp4 ends
-        } else if (index === 6) {
-          // Stop video playback, no more transitions
-          nextVideo.removeEventListener("ended", onEnd);
-        }
-      }
-
       nextVideo.addEventListener("ended", onEnd);
     } else {
       // Clear end event listener for looping videos
@@ -58,6 +45,22 @@ document.addEventListener("DOMContentLoaded", function () {
 
     // Pause the currently active video
     activeVideo.pause();
+  }
+
+  // Define the onEnd function outside of playVideo
+  function onEnd() {
+    if (currentIndex === 2) {
+      playVideo(3); // Switch to main~2(2) on loop after main~2.mp4 ends
+    } else if (currentIndex === 3) {
+      playVideo(4); // Switch to main~3(3) on loop after main~3.mp4 ends
+    } else if (currentIndex === 6) {
+      // Stop video playback, no more transitions
+      nextVideo.removeEventListener("ended", onEnd);
+
+      // Ensure the last video stays on top
+      nextVideo.style.zIndex = "1";
+      activeVideo.style.zIndex = "0";
+    }
   }
 
   function handleSlideChange(newIndex) {
