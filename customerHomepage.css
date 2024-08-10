@@ -330,7 +330,7 @@ margin-top: 10px;
     background-color: #041A40;
     border: none;
     border-radius: 50%;
-    padding: 4px 7px 5px 7px;;
+    padding: 3px 7px 6px 7px;
     cursor: pointer;
     z-index: 20;
     box-shadow: 0 4px 4px 0 #00000015;
@@ -344,7 +344,7 @@ margin-top: 10px;
     background-color: #041A40;
     border: none;
     border-radius: 50%;
-    padding: 4px 7px 5px 7px;;
+    padding: 3px 7px 6px 7px;
     cursor: pointer;
     z-index: 10;
     box-shadow: 0 4px 4px 0 #00000015;
@@ -1602,11 +1602,20 @@ margin-left: 20px;
 }
 
 @media screen and (max-width: 577px) {
+    .nav .upper-nav {
+        padding: 10px 10px 0 10px;
+    }
     .upper-nav .upper-nav-right {
         display: none !important;
     }
     .nav .upper-nav .d-flex {
         justify-content: space-between !important;
+    }
+    .upper-nav .container .d-flex:first-child {
+        margin-left: 0 !important;
+    }
+    .lower-nav .container {
+        width: 100%;
     }
     .section-one-bottom p, .section-one-bottom button {
         font-size: 0.85rem;
