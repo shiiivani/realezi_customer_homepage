@@ -35,8 +35,8 @@ document.addEventListener("DOMContentLoaded", function () {
   const maxValueDisplay = document.getElementById("maxValue");
 
   function updateSliderValues() {
-    minValueDisplay.textContent = `Rs.${minSlider.value}Cr`;
-    maxValueDisplay.textContent = `Rs.${maxSlider.value}Cr`;
+    minValueDisplay.textContent = `Rs.${minSlider.value}Lakh`;
+    maxValueDisplay.textContent = `Rs.${maxSlider.value}Lakh`;
   }
 
   minSlider.addEventListener("input", function () {

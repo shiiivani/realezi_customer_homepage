@@ -1696,6 +1696,13 @@ margin-left: 20px;
     .search-container {
         width: 100%;
     }
+    .section-two-nav li {
+        margin: 8px 10px;
+        font-size: 0.9rem;
+    }
+    .section-two-nav li:first-child {
+        margin-left: 10px;
+    }
     .section-one-bottom p br{
         display: none;
     }
