@@ -11,7 +11,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
   dropdownLabel.addEventListener("click", function () {
     const screenWidth = window.innerWidth;
-    if (screenWidth <= 520) {
+    if (screenWidth <= 767) {
       dropdownOptions.classList.toggle("active");
       dropdownContent.classList.remove("active");
     } else {
@@ -119,10 +119,19 @@ document.addEventListener("DOMContentLoaded", function () {
 document.addEventListener("DOMContentLoaded", function () {
   const slider = document.querySelector(".section-two-nav ul");
   const slideRightBtn = document.getElementById("slideRightNav");
+  const slideLeftBtn = document.getElementById("slideLeftNav");
 
   slideRightBtn.addEventListener("click", function () {
+    slideLeftBtn.classList.remove("hidden");
     slider.scrollBy({
       left: 100,
+      behavior: "smooth",
+    });
+  });
+
+  slideLeftBtn.addEventListener("click", function () {
+    slider.scrollBy({
+      left: -100,
       behavior: "smooth",
     });
   });
