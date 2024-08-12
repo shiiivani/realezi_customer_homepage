@@ -14,6 +14,7 @@ document.addEventListener("DOMContentLoaded", function () {
     if (screenWidth <= 767) {
       dropdownOptions.classList.toggle("active");
       dropdownContent.classList.remove("active");
+      dropdownLabel.classList.toggle("active");
     } else {
       dropdownContent.classList.toggle("active");
     }
@@ -75,13 +76,14 @@ document.addEventListener("DOMContentLoaded", function () {
 
     button.addEventListener("click", () => {
       options.classList.toggle("active");
+      button.classList.toggle("active");
     });
     listItems.forEach((item) => {
       item.addEventListener("click", function () {
         listItems.forEach((li) => li.classList.remove("selected"));
         item.classList.add("selected");
         options.classList.remove("active");
-        button.textContent = item.textContent;
+        button.querySelector("p").textContent = item.textContent;
       });
     });
   });
