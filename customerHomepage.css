@@ -1081,7 +1081,7 @@ opacity: 1;
     background-color: #000;
     color: #fff;
     transition: left 0.5s ease;
-    z-index: 10;
+    z-index: 5;
     padding: 20px;
 }
 
@@ -1734,6 +1734,7 @@ margin-left: 20px;
 .single-news-card h4 {
     margin: 15px 0;
 }
+
 .section-seven .text-scroller {
     font-size: 2rem;
 }

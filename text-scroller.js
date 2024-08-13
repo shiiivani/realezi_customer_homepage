@@ -17,10 +17,11 @@ tl.fromTo(
   ".text-scroller",
   { yPercent: 110, opacity: 0 },
   {
-    yPercent: -125,
+    yPercent: -150,
     opacity: 1,
     ease: "none",
-    stagger: 0.5, // Adjust for timing between texts
+    duration: 120, // Increase duration for slower scrolling
+    stagger: 80, // Adjust for timing between texts
   }
 );
 
