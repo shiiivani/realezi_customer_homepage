@@ -768,7 +768,6 @@ top: -14px;
     padding: 20px 0 7% 0;
 }
 
-
 .section-three .video {
     margin: 15px;
     width: 400px !important;
@@ -2130,6 +2129,12 @@ margin-left: 20px;
 @media screen and (min-width: 577px) {
     .upper-nav-ham-menu {
         display: none;
+    }
+}
+
+@media screen and (max-height: 730px) {
+    .section-five .container {
+        height: 950px;
     }
 }
 
