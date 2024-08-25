@@ -1439,7 +1439,7 @@ opacity: 1;
   }
 
   .section-seven .section-seven-inner {
-    height: 100vh;
+    height: 140vh;
     background: #111F3C;
     display: flex;
     align-items: center;
@@ -1480,6 +1480,8 @@ opacity: 1;
     font-size: 3rem;
     font-weight: 400;
     left: 50%;
+    position: absolute;
+    bottom: 20px;
   }
 
 
