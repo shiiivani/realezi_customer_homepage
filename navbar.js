@@ -22,6 +22,16 @@ listItems.forEach((item) => {
   });
 });
 
+const listItems2 = document.querySelectorAll(".lower-nav ul li");
+
+listItems2.forEach((item) => {
+  item.addEventListener("click", function () {
+    listItems2.forEach((li) => li.classList.remove("active"));
+
+    this.classList.add("active");
+  });
+});
+
 document.addEventListener("DOMContentLoaded", function () {
   const upperNavHam = document.querySelector(".upper-nav-ham-menu");
   const upperNavClose = document.querySelector(".upper-nav-close");

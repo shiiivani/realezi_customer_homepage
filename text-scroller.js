@@ -8,7 +8,7 @@ const tl = gsap.timeline({
     start: "top top",
     end: "bottom top",
     scrub: true,
-    pin: true, // Pin the section in place
+    pin: true,
   },
 });
 
@@ -17,11 +17,11 @@ tl.fromTo(
   ".text-scroller",
   { yPercent: 110, opacity: 0 },
   {
-    yPercent: -150,
+    yPercent: -190,
     opacity: 1,
     ease: "none",
-    duration: 120, // Increase duration for slower scrolling
-    stagger: 80, // Adjust for timing between texts
+    duration: 120,
+    stagger: 80,
   }
 );
 
@@ -31,7 +31,7 @@ tl.to(
   {
     opacity: 0,
     ease: "none",
-    duration: 5, // Increase duration for a slower opacity transition
+    duration: 5,
   },
-  "-=1" // Adjust overlap timing to ensure smooth transition
+  "-=1"
 );
