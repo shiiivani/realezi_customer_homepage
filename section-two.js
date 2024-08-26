@@ -182,16 +182,26 @@ function populateDropdownOptions(options) {
 }
 
 document.querySelectorAll(".properties-categories canvas").forEach((canvas) => {
-  console.log("clicked");
+  console.log("Event listeners attached");
+
+  // For click events
   canvas.addEventListener("click", function () {
-    console.log("clicked");
-    const selectedCanvasId = this.id;
-    if (propertyOptions[selectedCanvasId]) {
-      document.getElementById("dropdown-button").disabled = false;
-      populateDropdownOptions(propertyOptions[selectedCanvasId]);
-    }
+    handleCanvasClick(this);
+  });
+
+  // For touch events
+  canvas.addEventListener("touchstart", function () {
+    handleCanvasClick(this);
   });
 });
+
+function handleCanvasClick(canvas) {
+  const selectedCanvasId = canvas.id;
+  if (propertyOptions[selectedCanvasId]) {
+    document.getElementById("dropdown-button").disabled = false;
+    populateDropdownOptions(propertyOptions[selectedCanvasId]);
+  }
+}
 
 const dropdownButton = document.getElementById("dropdown-button");
 dropdownButton.addEventListener("click", function (event) {
