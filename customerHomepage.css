@@ -2296,6 +2296,7 @@ margin-left: 20px;
 }
 }
 
+
 @media screen and (max-width: 445px) {
     .section-five .d-flex div:nth-child(2) {
         display: none;
@@ -2318,6 +2319,8 @@ margin-left: 20px;
     .section-three .video-container:hover {
         animation-play-state: paused;
     }
+
+    
     
     @keyframes video-scroll-right {
         0% {
@@ -2354,7 +2357,7 @@ margin-left: 20px;
         margin: 0;
     }
     .video .volume-icon {
-        right: 105px;
+        right: 115px;
         bottom: 75px;
     }
     .section-three .video .d-flex {
@@ -2380,9 +2383,9 @@ margin-left: 20px;
 }
 
 
-@media screen and (max-width: 365px) {
+@media screen and (max-width: 375px) {
     .video .volume-icon {
-        right: 80px;
+        right: 90px;
     }
 }
 
