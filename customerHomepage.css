@@ -2376,6 +2376,20 @@ margin-left: 20px;
     }
 }
 
+@media screen and (max-height: 400px) {
+    .section-seven h3{
+        position: absolute;
+        left: 30%;
+        bottom: 20px;
+    }
+}
+
+@media screen and (max-height: 400px) and (max-width:745px) {
+    .section-seven h3{
+        left: 25%;
+    }
+}
+
 @media screen and (max-width: 390px) {
     h2 {
         font-size: 2rem !important;
