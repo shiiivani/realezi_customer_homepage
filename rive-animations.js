@@ -5,30 +5,45 @@ const riveAnimations = {
     canvas: document.getElementById("residential"),
     autoplay: true,
     stateMachines: "State Machine 1",
+    onLoad: () => {
+      riveAnimations.residential.resizeDrawingSurfaceToCanvas();
+    },
   }),
   commercial: new rive.Rive({
     src: "./riv/commercial.riv",
     canvas: document.getElementById("commercial"),
     autoplay: true,
     stateMachines: "State Machine 1",
+    onLoad: () => {
+      riveAnimations.commercial.resizeDrawingSurfaceToCanvas();
+    },
   }),
   plot: new rive.Rive({
     src: "./riv/plot.riv",
     canvas: document.getElementById("plot"),
     autoplay: true,
     stateMachines: "State Machine 1",
+    onLoad: () => {
+      riveAnimations.plot.resizeDrawingSurfaceToCanvas();
+    },
   }),
   pg: new rive.Rive({
     src: "./riv/pg.riv",
     canvas: document.getElementById("pg"),
     autoplay: true,
     stateMachines: "State Machine 1",
+    onLoad: () => {
+      riveAnimations.pg.resizeDrawingSurfaceToCanvas();
+    },
   }),
   coworkingspace: new rive.Rive({
     src: "./riv/coworkingspace.riv",
     canvas: document.getElementById("coworkingspace"),
     autoplay: true,
     stateMachines: "State Machine 1",
+    onLoad: () => {
+      riveAnimations.coworkingspace.resizeDrawingSurfaceToCanvas();
+    },
   }),
 };
 
@@ -74,9 +89,36 @@ addEventListeners("pg");
 addEventListeners("coworkingspace");
 
 // Party Popper Animation
-new rive.Rive({
+const partyPopper = new rive.Rive({
   src: "./riv/partyPopper.riv",
   canvas: document.getElementById("partyPopper"),
   autoplay: true,
   stateMachines: "State Machine 1",
+  onLoad: () => {
+    partyPopper.resizeDrawingSurfaceToCanvas();
+  },
+});
+
+document.getElementById("rent-btn").addEventListener("click", () => {
+  riveAnimations.pg.cleanup();
+  riveAnimations.pg = new rive.Rive({
+    src: "./riv/pg.riv",
+    canvas: document.getElementById("pg"),
+    autoplay: true,
+    stateMachines: "State Machine 1",
+    onLoad: () => {
+      riveAnimations.pg.resizeDrawingSurfaceToCanvas();
+    },
+  });
+
+  riveAnimations.coworkingspace.cleanup();
+  riveAnimations.coworkingspace = new rive.Rive({
+    src: "./riv/coworkingspace.riv",
+    canvas: document.getElementById("coworkingspace"),
+    autoplay: true,
+    stateMachines: "State Machine 1",
+    onLoad: () => {
+      riveAnimations.coworkingspace.resizeDrawingSurfaceToCanvas();
+    },
+  });
 });

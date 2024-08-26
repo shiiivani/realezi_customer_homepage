@@ -1,4 +1,4 @@
-// Toggle Button
+// Buy or Rent Toggle Button
 function toggleCanvasVisibility(selectedOption) {
   const pgCanvas = document.getElementById("pg");
   const coworkingSpaceCanvas = document.getElementById("coworkingspace");
@@ -70,12 +70,11 @@ document.addEventListener("DOMContentLoaded", function () {
   const minValueDisplay = document.getElementById("minValue");
   const maxValueDisplay = document.getElementById("maxValue");
 
-  // Convert the slider value to the corresponding amount
   function convertToAmount(value) {
     if (value <= 100) {
-      return `Rs.${value} Lakh`; // 1 to 100 Lakhs
+      return `Rs.${value} Lakh`;
     } else {
-      return `Rs.${(value / 100).toFixed(1)} Crore`; // 1 to 5 Crores
+      return `Rs.${(value / 100).toFixed(1)} Crore`;
     }
   }
 
@@ -184,12 +183,10 @@ function populateDropdownOptions(options) {
 document.querySelectorAll(".properties-categories canvas").forEach((canvas) => {
   console.log("Event listeners attached");
 
-  // For click events
   canvas.addEventListener("click", function () {
     handleCanvasClick(this);
   });
 
-  // For touch events
   canvas.addEventListener("touchstart", function () {
     handleCanvasClick(this);
   });
@@ -211,7 +208,7 @@ dropdownButton.addEventListener("click", function (event) {
   }
 });
 
-// Section two navbar
+// Section two navbar active button bounce animation
 document.addEventListener("DOMContentLoaded", function () {
   if (window.innerWidth < 560) {
     const navItems = document.querySelectorAll(".section-two-nav li");
@@ -387,6 +384,7 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 });
 
+// Section two Navbar Prev and Next nav buttons
 document.addEventListener("DOMContentLoaded", function () {
   const slider = document.querySelector(".section-two-nav ul");
   const slideRightBtn = document.getElementById("slideRightNav");
