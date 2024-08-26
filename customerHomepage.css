@@ -150,6 +150,7 @@ button {
 
  .upper-nav-ham-options li:hover {
     color: #EC7100;
+    cursor: pointer;
  }
  
  .lower-nav {
@@ -246,6 +247,7 @@ margin-top: 10px;
  
  .mobile-nav li:hover {
      color: #EC7100 !important;
+     cursor: pointer;
  }
 
  /* Section One */
