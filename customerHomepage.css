@@ -2196,8 +2196,9 @@ margin-left: 20px;
     .footer .upper-footer {
         text-align: center
     }
-    .footer .upper-footer ul li{
-        text-align: center
+    .footer .upper-footer li{
+        margin-left: auto;
+        margin-right: auto;
     }
     .footer .upper-footer .d-flex:first-child{
         flex-direction: column;
