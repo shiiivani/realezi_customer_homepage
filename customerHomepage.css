@@ -750,15 +750,26 @@ top: -14px;
     margin-right: auto;
   }
 
-  .properties-categories canvas {
-    margin: 10px 20px;
+  .properties-categories .canvas-container {
     box-shadow: 5px 4px 11px 0 #00000015;
+    margin: 10px 20px;
     border-radius: 20px;
-    width: 120px;
-    height: 100px;
+    overflow: hidden;
+    width: 110px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
   }
 
-  .properties-categories canvas.hidden {
+  .properties-categories canvas {
+    width: 120px;
+    height: 100px;
+    transform: scale(1.1);
+  transform-origin:center;
+  }
+
+  .properties-categories .canvas-container.hidden {
     display: none;
   }
   .properties-categories canvas:hover {

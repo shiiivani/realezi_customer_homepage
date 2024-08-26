@@ -1,8 +1,10 @@
 // Buy or Rent Toggle Button
 function toggleCanvasVisibility(selectedOption) {
-  const pgCanvas = document.getElementById("pg");
-  const coworkingSpaceCanvas = document.getElementById("coworkingspace");
-  const plotCanvas = document.getElementById("plot");
+  const pgCanvas = document.getElementById("pg-container");
+  const coworkingSpaceCanvas = document.getElementById(
+    "coworkingspace-container"
+  );
+  const plotCanvas = document.getElementById("plot-container");
 
   if (selectedOption === "Buy") {
     pgCanvas.classList.add("hidden");
