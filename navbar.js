@@ -1,14 +1,9 @@
 document.addEventListener("DOMContentLoaded", function () {
   const hamburgerIcon = document.querySelector(".hamburger-menu");
-  const closeIcon = document.querySelector(".close-icon");
   const mobileNav = document.querySelector(".mobile-nav");
 
   hamburgerIcon.addEventListener("click", function () {
-    mobileNav.classList.add("active");
-  });
-
-  closeIcon.addEventListener("click", function () {
-    mobileNav.classList.remove("active");
+    mobileNav.classList.toggle("active");
   });
 });
 
@@ -38,13 +33,6 @@ document.addEventListener("DOMContentLoaded", function () {
   const upperNavHamOptions = document.querySelector(".upper-nav-ham-options");
 
   upperNavHam.addEventListener("click", function () {
-    upperNavHamOptions.classList.add("active");
-    upperNavHam.classList.add("hidden");
-    upperNavClose.classList.remove("hidden");
-  });
-  upperNavClose.addEventListener("click", function () {
-    upperNavHamOptions.classList.remove("active");
-    upperNavHam.classList.remove("hidden");
-    upperNavClose.classList.add("hidden");
+    upperNavHamOptions.classList.toggle("active");
   });
 });

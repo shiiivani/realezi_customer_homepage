@@ -152,6 +152,161 @@ button {
     color: #EC7100;
     cursor: pointer;
  }
+
+ #checkbox {
+    display: none;
+  }
+  
+  .toggle {
+    position: absolute;
+    width: 25px;
+    height: 30px;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    transition-duration: .3s;
+    right: 25px;
+    top: 8px;
+    z-index: 1000;
+  }
+  
+  .bars {
+    width: 100%;
+    height: 2px;
+    background-color: rgb(253, 255, 243);
+    border-radius: 5px;
+    transition-duration: .3s;
+  }
+  
+  #bar4, #bar5 {
+    display: none;
+  }
+  
+  #checkbox:checked + .toggle #bar4 {
+    display: flex;
+    transform: translateY(11.5px) translateX(5px) rotate(16deg);
+    margin-left: 0;
+    transform-origin: right;
+    transition-duration: .3s;
+    z-index: 2;
+    width: 14.5px;
+  }
+  
+  #checkbox:checked + .toggle #bar5 {
+    display: flex;
+    transform: translateY(-0.4px) translateX(-6.5px) rotate(-17deg);
+    margin-left: 0;
+    transform-origin: right;
+    transition-duration: .3s;
+    z-index: 2;
+    width: 13.8px;
+  }
+  
+  #checkbox:checked + .toggle #bar2 {
+    transform: translateY(20px) rotate(60deg);
+    margin-left: 0;
+    transform-origin: right;
+    transition-duration: .3s;
+    z-index: 2;
+  }
+  
+  #checkbox:checked + .toggle #bar1 {
+    transform: translateY(28px) rotate(-60deg);
+    transition-duration: .3s;
+    transform-origin: left;
+    z-index: 1;
+  }
+  
+  #checkbox:checked + .toggle {
+    transform: rotate(-90deg);
+  }
+  #checkbox:checked + .toggle #bar3 {
+    transform: translateY(12px) rotate(2deg);
+    transition-duration: .3s;
+    transform-origin:right;
+    display: none;
+  }
+
+
+ #checkbox2 {
+    display: none;
+  }
+  
+  .toggle2 {
+    position: absolute;
+    width: 25px;
+    height: 30px;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    transition-duration: .3s;
+    right: 25px;
+    top: 8px;
+    z-index: 1000;
+  }
+  
+  .toggle2 .bars {
+    width: 100%;
+    height: 2px;
+    background-color: rgb(253, 255, 243);
+    border-radius: 5px;
+    transition-duration: .3s;
+  }
+  
+  .toggle2 #bar4, #bar5 {
+    display: none;
+  }
+  
+  #checkbox2:checked + .toggle2 #bar4 {
+    display: flex;
+    transform: translateY(11.5px) translateX(5px) rotate(16deg);
+    margin-left: 0;
+    transform-origin: right;
+    transition-duration: .3s;
+    z-index: 2;
+    width: 14.5px;
+  }
+  
+  #checkbox2:checked + .toggle2 #bar5 {
+    display: flex;
+    transform: translateY(-0.4px) translateX(-6.5px) rotate(-17deg);
+    margin-left: 0;
+    transform-origin: right;
+    transition-duration: .3s;
+    z-index: 2;
+    width: 13.8px;
+  }
+  
+  #checkbox2:checked + .toggle2 #bar2 {
+    transform: translateY(20px) rotate(60deg);
+    margin-left: 0;
+    transform-origin: right;
+    transition-duration: .3s;
+    z-index: 2;
+  }
+  
+  #checkbox2:checked + .toggle2 #bar1 {
+    transform: translateY(28px) rotate(-60deg);
+    transition-duration: .3s;
+    transform-origin: left;
+    z-index: 1;
+  }
+  
+  #checkbox2:checked + .toggle2 {
+    transform: rotate(-90deg);
+  }
+  #checkbox2:checked + .toggle2 #bar3 {
+    transform: translateY(12px) rotate(2deg);
+    transition-duration: .3s;
+    transform-origin:right;
+    display: none;
+  }
  
  .lower-nav {
      width: 100%;
@@ -206,7 +361,8 @@ margin-top: 10px;
  
  .mobile-nav {
      position: absolute;
-     top: -400%;
+     right: -500px;
+     top: 105px;
      width: 100%;
      background-color: #ffffff25;
      backdrop-filter: blur(10px);
@@ -218,17 +374,13 @@ margin-top: 10px;
      transition: top 0.5s ease-in-out;
      z-index: 999 !important;
      overflow: hidden;
-     transition: top 0.5s ease-out
+     transition: right 0.5s ease-out;
  }
  
  .mobile-nav.active {
      display: flex;
-     top: 0;
- }
- .mobile-nav .close-icon {
-     position: absolute;
-     right: 30px;
-     top: 20px;
+     top: 100px;
+     right: 0px;
  }
  .mobile-nav img {
      margin-bottom: 15px;
