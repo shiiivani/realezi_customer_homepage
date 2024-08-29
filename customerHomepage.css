@@ -6,6 +6,10 @@
     display: none;
 }
 
+html, body {
+    overflow-x: hidden;
+}
+
 body, main {
     background: transparent;
     overflow-x: hidden;
@@ -375,11 +379,12 @@ margin-top: 10px;
      z-index: 999 !important;
      overflow: hidden;
      transition: right 0.5s ease-out;
+     display: none;
  }
  
  .mobile-nav.active {
      display: flex;
-     top: 100px;
+     top: 105px;
      right: 0px;
  }
 
