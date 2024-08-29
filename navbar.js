@@ -5,6 +5,12 @@ document.addEventListener("DOMContentLoaded", function () {
   hamburgerIcon.addEventListener("click", function () {
     mobileNav.classList.toggle("active");
   });
+  window.addEventListener("scroll", function () {
+    if (mobileNav.classList.contains("active")) {
+      mobileNav.classList.remove("active");
+      hamburgerIcon.checked = false;
+    }
+  });
 });
 
 const listItems = document.querySelectorAll(".upper-nav ul:first-child li");

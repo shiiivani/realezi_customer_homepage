@@ -6,10 +6,6 @@
     display: none;
 }
 
-html, body {
-    overflow-x: hidden;
-}
-
 body, main {
     background: transparent;
     overflow-x: hidden;
@@ -364,28 +360,25 @@ margin-top: 10px;
  }
  
  .mobile-nav {
-     position: absolute;
-     right: -100%;
+     position: fixed;
      top: 105px;
      width: 100%;
      background-color: #ffffff25;
      backdrop-filter: blur(10px);
+     display: flex;
      flex-direction: column;
      align-items: center;
      justify-content: center;
      text-align: center;
      padding: 20px;
-     transition: top 0.5s ease-in-out;
-     z-index: 999 !important;
+     z-index: 200;
      overflow: hidden;
-     transition: right 0.5s ease-out;
-     display: none;
+     transition: transform 0.5s ease-out;
+     transform: translateX(100%);
  }
  
  .mobile-nav.active {
-     display: flex;
-     top: 105px;
-     right: 0px;
+     transform: translateX(0);
  }
 
  .mobile-nav img {
