@@ -22,19 +22,16 @@ document.addEventListener("DOMContentLoaded", function () {
     const videoSlider = videoContainer.closest(".video-slider");
     const videoWrapper = videoSlider.querySelector(".video-container");
 
-    // Pause animation on hover and show the volume icon
     videoContainer.addEventListener("mouseover", function () {
       videoWrapper.style.animationPlayState = "paused";
       volumeCont.classList.remove("hidden");
     });
 
-    // Resume animation when hover ends and hide the volume icon
     videoContainer.addEventListener("mouseout", function () {
       videoWrapper.style.animationPlayState = "running";
       volumeCont.classList.add("hidden");
     });
 
-    // Toggle mute and icons on click
     volumeUpIcon.addEventListener("click", function () {
       video.muted = true;
       volumeUpIcon.classList.add("hidden");
@@ -58,9 +55,11 @@ document.addEventListener("DOMContentLoaded", () => {
     const prevBtn = slider.querySelector(".prev-btn");
     const nextBtn = slider.querySelector(".next-btn");
     let index = 0;
+    let startX = 0;
+    let isDragging = false;
 
     const updateSlider = () => {
-      container.style.transform = `translateX(-${index * 100}%)`;
+      container.style.transform = `translateX(-${index * 60}%)`;
     };
 
     const checkScreenSize = () => {
@@ -92,6 +91,36 @@ document.addEventListener("DOMContentLoaded", () => {
         updateSlider();
       }
     };
+
+    // Touch event handlers for swiping
+    const handleTouchStart = (e) => {
+      startX = e.touches[0].clientX;
+      isDragging = true;
+    };
+
+    const handleTouchMove = (e) => {
+      if (!isDragging) return;
+
+      const touchX = e.touches[0].clientX;
+      const deltaX = touchX - startX;
+
+      if (deltaX > 50) {
+        slidePrev();
+        isDragging = false; // Prevents multiple slides in a single swipe
+      } else if (deltaX < -50) {
+        slideNext();
+        isDragging = false;
+      }
+    };
+
+    const handleTouchEnd = () => {
+      isDragging = false;
+    };
+
+    // Add touch event listeners to the container
+    container.addEventListener("touchstart", handleTouchStart);
+    container.addEventListener("touchmove", handleTouchMove);
+    container.addEventListener("touchend", handleTouchEnd);
 
     window.addEventListener("resize", checkScreenSize);
     checkScreenSize();

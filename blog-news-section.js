@@ -30,6 +30,96 @@ document.addEventListener("DOMContentLoaded", function () {
   showSection("blog");
 });
 
+document.addEventListener("DOMContentLoaded", function () {
+  const toggleButtons = document.querySelectorAll(
+    ".blog-news-toggle-button button"
+  );
+  let activeToggle = document.querySelector(
+    ".blog-news-toggle-button button.active"
+  );
+  let BlogtoggleSlideLine = document.createElement("div");
+
+  BlogtoggleSlideLine.classList.add("toggle-slide-line");
+  document
+    .querySelector(".blog-news-toggle-button")
+    .appendChild(BlogtoggleSlideLine);
+
+  gsap.set(BlogtoggleSlideLine, {
+    height: 34,
+    position: "absolute",
+    bottom: 4,
+    left: 0,
+    zIndex: 2,
+    borderRadius: "2px",
+    transformOrigin: "left center",
+    borderRadius: 9,
+  });
+
+  if (activeToggle) {
+    gsap.set(BlogtoggleSlideLine, {
+      width: activeToggle.offsetWidth,
+      left: activeToggle.offsetLeft,
+      backgroundColor: "#FFFFFF",
+    });
+  }
+
+  toggleButtons.forEach(function (button) {
+    button.addEventListener("click", function () {
+      toggleButtons.forEach(function (button) {
+        button.classList.remove("active");
+      });
+      this.classList.add("active");
+
+      updateActiveToggle(this);
+
+      const selectedOption = this.textContent.trim();
+      toggleCanvasVisibility(selectedOption);
+    });
+  });
+
+  function updateActiveToggle(newActiveToggle) {
+    if (activeToggle !== newActiveToggle) {
+      activeToggle.classList.remove("active");
+      newActiveToggle.classList.add("active");
+
+      const tl = gsap.timeline();
+
+      const activeToggleRect = activeToggle.getBoundingClientRect();
+      const newToggleRect = newActiveToggle.getBoundingClientRect();
+      const direction =
+        newToggleRect.left < activeToggleRect.left ? "left" : "right";
+
+      tl.to(BlogtoggleSlideLine, {
+        duration: 0.3,
+        width: newActiveToggle.offsetWidth,
+        left: newActiveToggle.offsetLeft,
+        ease: "power2.out",
+      })
+        .to(
+          BlogtoggleSlideLine,
+          {
+            duration: 0.1,
+            x: direction === "left" ? "-3px" : "+3px",
+            ease: "bounce.out",
+          },
+          "-=0.1"
+        )
+        .to(BlogtoggleSlideLine, {
+          duration: 0.1,
+          x: direction === "left" ? "+3px" : "-3px",
+          ease: "bounce.out",
+        })
+        .to(BlogtoggleSlideLine, {
+          duration: 0.2,
+          x: "0px",
+          ease: "power2.inOut",
+        });
+
+      activeToggle = newActiveToggle;
+    }
+  }
+});
+
 // Filter dropdwon
 document.addEventListener("DOMContentLoaded", function () {
   const dropdowns = document.querySelectorAll(".filter-dropdown");

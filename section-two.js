@@ -1,35 +1,104 @@
 // Buy or Rent Toggle Button
 function toggleCanvasVisibility(selectedOption) {
-  const pgCanvas = document.getElementById("pg-container");
-  const coworkingSpaceCanvas = document.getElementById(
-    "coworkingspace-container"
+  const pgCanvas = document.querySelectorAll(".pg-container");
+  const coworkingSpaceCanvas = document.querySelectorAll(
+    ".coworkingspace-container"
   );
-  const plotCanvas = document.getElementById("plot-container");
+  const plotCanvas = document.querySelectorAll(".plot-container");
 
   if (selectedOption === "Buy") {
-    pgCanvas.classList.add("hidden");
-    coworkingSpaceCanvas.classList.add("hidden");
-    plotCanvas.classList.remove("hidden");
+    pgCanvas.forEach((canvas) => canvas.classList.add("hidden"));
+    coworkingSpaceCanvas.forEach((canvas) => canvas.classList.add("hidden"));
+    plotCanvas.forEach((canvas) => canvas.classList.remove("hidden"));
   } else if (selectedOption === "Rent") {
-    pgCanvas.classList.remove("hidden");
-    coworkingSpaceCanvas.classList.remove("hidden");
-    plotCanvas.classList.add("hidden");
+    pgCanvas.forEach((canvas) => canvas.classList.remove("hidden"));
+    coworkingSpaceCanvas.forEach((canvas) => canvas.classList.remove("hidden"));
+    plotCanvas.forEach((canvas) => canvas.classList.add("hidden"));
   }
 }
 
-document.querySelectorAll(".toggle-button p").forEach(function (p) {
-  p.addEventListener("click", function () {
-    document.querySelectorAll(".toggle-button p").forEach(function (p) {
-      p.classList.remove("active");
-    });
-    this.classList.add("active");
-
-    const selectedOption = this.textContent.trim();
-    toggleCanvasVisibility(selectedOption);
-  });
-});
-
 document.addEventListener("DOMContentLoaded", function () {
+  const toggleButtons = document.querySelectorAll(".toggle-button p");
+  let activeToggle = document.querySelector(".toggle-button p.active");
+  let toggleSlideLine = document.createElement("div");
+
+  toggleSlideLine.classList.add("toggle-slide-line");
+  document.querySelector(".toggle-button").appendChild(toggleSlideLine);
+
+  gsap.set(toggleSlideLine, {
+    height: 34,
+    position: "absolute",
+    bottom: 3,
+    zIndex: 2,
+    borderRadius: "2px",
+    transformOrigin: "left center",
+    borderRadius: 9,
+  });
+
+  if (activeToggle) {
+    gsap.set(toggleSlideLine, {
+      width: activeToggle.offsetWidth,
+      left: activeToggle.offsetLeft,
+      backgroundColor: "#111F3C",
+    });
+  }
+
+  toggleButtons.forEach(function (button) {
+    button.addEventListener("click", function () {
+      toggleButtons.forEach(function (p) {
+        p.classList.remove("active");
+      });
+      this.classList.add("active");
+
+      updateActiveToggle(this);
+
+      const selectedOption = this.textContent.trim();
+      toggleCanvasVisibility(selectedOption);
+    });
+  });
+
+  function updateActiveToggle(newActiveToggle) {
+    if (activeToggle !== newActiveToggle) {
+      activeToggle.classList.remove("active");
+      newActiveToggle.classList.add("active");
+
+      const tl = gsap.timeline();
+
+      const activeToggleRect = activeToggle.getBoundingClientRect();
+      const newToggleRect = newActiveToggle.getBoundingClientRect();
+      const direction =
+        newToggleRect.left < activeToggleRect.left ? "left" : "right";
+
+      tl.to(toggleSlideLine, {
+        duration: 0.3,
+        width: newActiveToggle.offsetWidth,
+        left: newActiveToggle.offsetLeft,
+        ease: "power2.out",
+      })
+        .to(
+          toggleSlideLine,
+          {
+            duration: 0.1,
+            x: direction === "left" ? "-3px" : "+3px",
+            ease: "bounce.out",
+          },
+          "-=0.1"
+        )
+        .to(toggleSlideLine, {
+          duration: 0.1,
+          x: direction === "left" ? "+3px" : "-3px",
+          ease: "bounce.out",
+        })
+        .to(toggleSlideLine, {
+          duration: 0.2,
+          x: "0px",
+          ease: "power2.inOut",
+        });
+
+      activeToggle = newActiveToggle;
+    }
+  }
+
   const initialOption = document
     .querySelector(".toggle-button p.active")
     .textContent.trim();
@@ -183,8 +252,6 @@ function populateDropdownOptions(options) {
 }
 
 document.querySelectorAll(".properties-categories canvas").forEach((canvas) => {
-  console.log("Event listeners attached");
-
   canvas.addEventListener("click", function () {
     handleCanvasClick(this);
   });
@@ -196,6 +263,7 @@ document.querySelectorAll(".properties-categories canvas").forEach((canvas) => {
 
 function handleCanvasClick(canvas) {
   const selectedCanvasId = canvas.id;
+  console.log(selectedCanvasId);
   if (propertyOptions[selectedCanvasId]) {
     document.getElementById("dropdown-button").disabled = false;
     populateDropdownOptions(propertyOptions[selectedCanvasId]);
@@ -210,200 +278,167 @@ dropdownButton.addEventListener("click", function (event) {
   }
 });
 
-// Section two navbar active button bounce animation
+// Bounce animation on section two nav
 document.addEventListener("DOMContentLoaded", function () {
-  if (window.innerWidth < 560) {
-    const navItems = document.querySelectorAll(".section-two-nav li");
+  const navItems = document.querySelectorAll(".section-two-nav li");
+  const navBar = document.querySelector(".section-two-nav");
+  let activeItem = document.querySelector(".section-two-nav li.active");
+  let slideLine = document.createElement("div");
+  let hoverLine = document.createElement("div");
 
-    navItems.forEach((item) => {
-      item.addEventListener("click", function () {
-        navItems.forEach((cat) => cat.classList.remove("active"));
-        item.classList.add("active");
-      });
-    });
-  }
-});
+  let mouseX = 0;
+  let isCursorInside = false;
 
-document.addEventListener("DOMContentLoaded", function () {
-  if (window.innerWidth > 560) {
-    const navItems = document.querySelectorAll(".section-two-nav li");
-    const navBar = document.querySelector(".section-two-nav");
-    let activeItem = document.querySelector(".section-two-nav li.active");
-    let slideLine = document.createElement("div");
-    let hoverLine = document.createElement("div");
+  slideLine.classList.add("slide-line");
+  navBar.appendChild(slideLine);
 
-    let mouseX = 0;
-    let isCursorInside = false;
+  hoverLine.classList.add("hover-line");
+  navBar.appendChild(hoverLine);
 
-    slideLine.classList.add("slide-line");
-    navBar.appendChild(slideLine);
+  gsap.set([slideLine, hoverLine], {
+    height: 30,
+    position: "absolute",
+    bottom: 10,
+    borderRadius: "15px",
+    zIndex: 1,
+    transformOrigin: "left center",
+  });
 
-    hoverLine.classList.add("hover-line");
-    navBar.appendChild(hoverLine);
+  gsap.set(slideLine, {
+    width: activeItem.offsetWidth,
+    left: activeItem.offsetLeft,
+    backgroundColor: "#111F3C",
+  });
 
-    gsap.set([slideLine, hoverLine], {
-      height: 30,
-      position: "absolute",
-      bottom: 10,
-      borderRadius: "15px",
-      zIndex: 1,
-      transformOrigin: "left center",
-    });
+  gsap.set(hoverLine, {
+    width: 0,
+    left: 0,
+    backgroundColor: "#F4F4F4",
+    zIndex: 0,
+  });
 
-    gsap.set(slideLine, {
-      width: activeItem.offsetWidth,
-      left: activeItem.offsetLeft,
-      backgroundColor: "#111F3C",
-    });
+  function updateActiveItem(newActiveItem) {
+    if (activeItem !== newActiveItem) {
+      activeItem.classList.remove("active");
+      newActiveItem.classList.add("active");
 
-    gsap.set(hoverLine, {
-      width: 0,
-      left: 0,
-      backgroundColor: "#F4F4F4",
-      zIndex: 0,
-    });
+      const tl = gsap.timeline();
 
-    function updateActiveItem(newActiveItem) {
-      if (activeItem !== newActiveItem) {
-        activeItem.classList.remove("active");
-        newActiveItem.classList.add("active");
+      const activeItemRect = activeItem.getBoundingClientRect();
+      const newItemRect = newActiveItem.getBoundingClientRect();
+      const direction =
+        newItemRect.left < activeItemRect.left ? "left" : "right";
 
-        const tl = gsap.timeline();
-
-        const activeItemRect = activeItem.getBoundingClientRect();
-        const newItemRect = newActiveItem.getBoundingClientRect();
-        const direction =
-          newItemRect.left < activeItemRect.left ? "left" : "right";
-
-        tl.to(slideLine, {
-          duration: 0.3,
-          width: newActiveItem.offsetWidth,
-          left: newActiveItem.offsetLeft,
-          ease: "power2.out",
-        })
-          .to(
-            slideLine,
-            {
-              duration: 0.1,
-              x: direction === "left" ? "-3px" : "+3px",
-              ease: "bounce.out",
-            },
-            "-=0.1"
-          )
-          .to(slideLine, {
+      tl.to(slideLine, {
+        duration: 0.3,
+        width: newActiveItem.offsetWidth,
+        left: newActiveItem.offsetLeft,
+        ease: "power2.out",
+      })
+        .to(
+          slideLine,
+          {
             duration: 0.1,
-            x: direction === "left" ? "+3px" : "-3px",
+            x: direction === "left" ? "-3px" : "+3px",
             ease: "bounce.out",
-          })
-          .to(slideLine, {
-            duration: 0.2,
-            x: "0px",
-            ease: "power2.inOut",
-          });
-
-        activeItem = newActiveItem;
-      }
-    }
-
-    function attractToCursor() {
-      if (isCursorInside) {
-        const slideLineRect = slideLine.getBoundingClientRect();
-        const slideLineCenterX = slideLineRect.left + slideLineRect.width / 2;
-        const distanceX = mouseX - slideLineCenterX;
-        const distance = Math.abs(distanceX);
-
-        const maxDistance = 100;
-
-        if (distance < maxDistance) {
-          const intensity = Math.max(0, 1 - distance / maxDistance);
-          gsap.to(slideLine, {
-            x: intensity * (distanceX * 0.2),
-            duration: 0.1,
-            ease: "power2.out",
-          });
-        }
-      }
-    }
-
-    document.addEventListener("mousemove", (event) => {
-      mouseX = event.clientX;
-      attractToCursor();
-    });
-
-    navBar.addEventListener("mouseenter", () => {
-      isCursorInside = true;
-    });
-
-    navBar.addEventListener("mouseleave", () => {
-      isCursorInside = false;
-      gsap.to(slideLine, {
-        x: "0px",
-        duration: 0.2,
-        ease: "power2.inOut",
-      });
-    });
-
-    navItems.forEach((item) => {
-      item.addEventListener("mouseover", function () {
-        gsap.to(hoverLine, {
-          width: this.offsetWidth,
-          left: this.offsetLeft,
-          duration: 0.3,
-          ease: "power2.out",
+          },
+          "-=0.1"
+        )
+        .to(slideLine, {
+          duration: 0.1,
+          x: direction === "left" ? "+3px" : "-3px",
+          ease: "bounce.out",
+        })
+        .to(slideLine, {
+          duration: 0.2,
+          x: "0px",
+          ease: "power2.inOut",
         });
-      });
 
-      item.addEventListener("mouseout", function () {
-        gsap.to(hoverLine, {
-          width: 0,
-          duration: 0.3,
-          ease: "power2.out",
-        });
-      });
-
-      item.addEventListener("click", function () {
-        updateActiveItem(this);
-      });
-    });
-
-    navBar.addEventListener("mouseleave", function () {
-      updateActiveItem(activeItem);
-    });
+      activeItem = newActiveItem;
+    }
   }
+
+  function attractToCursor() {
+    if (isCursorInside) {
+      const slideLineRect = slideLine.getBoundingClientRect();
+      const slideLineCenterX = slideLineRect.left + slideLineRect.width / 2;
+      const distanceX = mouseX - slideLineCenterX;
+      const distance = Math.abs(distanceX);
+
+      const maxDistance = 100;
+
+      if (distance < maxDistance) {
+        const intensity = Math.max(0, 1 - distance / maxDistance);
+        gsap.to(slideLine, {
+          x: intensity * (distanceX * 0.2),
+          duration: 0.1,
+          ease: "power2.out",
+        });
+      }
+    }
+  }
+
+  document.addEventListener("mousemove", (event) => {
+    mouseX = event.clientX;
+    attractToCursor();
+  });
+
+  navBar.addEventListener("mouseenter", () => {
+    isCursorInside = true;
+  });
+
+  navBar.addEventListener("mouseleave", () => {
+    isCursorInside = false;
+    gsap.to(slideLine, {
+      x: "0px",
+      duration: 0.2,
+      ease: "power2.inOut",
+    });
+  });
+
+  navItems.forEach((item) => {
+    item.addEventListener("mouseover", function () {
+      gsap.to(hoverLine, {
+        width: this.offsetWidth,
+        left: this.offsetLeft,
+        duration: 0.3,
+        ease: "power2.out",
+      });
+    });
+
+    item.addEventListener("mouseout", function () {
+      gsap.to(hoverLine, {
+        width: 0,
+        duration: 0.3,
+        ease: "power2.out",
+      });
+    });
+
+    item.addEventListener("click", function () {
+      updateActiveItem(this);
+    });
+  });
+
+  navBar.addEventListener("mouseleave", function () {
+    updateActiveItem(activeItem);
+  });
 });
 
 // Section two fixed navbar
 document.addEventListener("DOMContentLoaded", function () {
   const nav = document.querySelector(".section-two-nav");
+  const sectionTwoHeader = document.querySelector(".section-two h2");
+
   const navInitialOffsetTop = nav.getBoundingClientRect().top + window.scrollY;
 
   window.addEventListener("scroll", function () {
     if (window.scrollY >= navInitialOffsetTop) {
       nav.classList.add("fixed");
+      sectionTwoHeader.style.marginTop = "85px";
     } else {
       nav.classList.remove("fixed");
+      sectionTwoHeader.style.marginTop = "15px";
     }
-  });
-});
-
-// Section two Navbar Prev and Next nav buttons
-document.addEventListener("DOMContentLoaded", function () {
-  const slider = document.querySelector(".section-two-nav ul");
-  const slideRightBtn = document.getElementById("slideRightNav");
-  const slideLeftBtn = document.getElementById("slideLeftNav");
-
-  slideRightBtn.addEventListener("click", function () {
-    slideLeftBtn.classList.remove("hidden");
-    slider.scrollBy({
-      left: 100,
-      behavior: "smooth",
-    });
-  });
-
-  slideLeftBtn.addEventListener("click", function () {
-    slider.scrollBy({
-      left: -100,
-      behavior: "smooth",
-    });
   });
 });

@@ -1,4 +1,3 @@
-// Ensure GSAP and ScrollTrigger are loaded
 gsap.registerPlugin(ScrollTrigger);
 
 // Create a GSAP timeline
@@ -8,7 +7,7 @@ const tl = gsap.timeline({
     start: "top top",
     end: "bottom top",
     scrub: true,
-    pin: true,
+    pin: true, // Keeps the section pinned while animations are playing
   },
 });
 
@@ -25,7 +24,7 @@ tl.fromTo(
   }
 );
 
-// Add the section opacity change to the timeline
+// Add the section opacity change to the timeline after text scroller animations
 tl.to(
   ".section-seven-inner",
   {
@@ -33,5 +32,39 @@ tl.to(
     ease: "none",
     duration: 5,
   },
-  "-=1"
+  "-=5" // Start the fade-out just before the text scrollers finish
 );
+
+// Add the animation for the h3 text to slide up with the scroll
+tl.fromTo(
+  ".section-seven h3",
+  {
+    opacity: 0,
+    yPercent: 100,
+  },
+  {
+    opacity: 1,
+    yPercent: 0,
+    ease: "none",
+    duration: 5,
+  },
+  "-=5"
+);
+
+tl.to(
+  ".section-seven h3",
+  {
+    yPercent: -300,
+    ease: "none",
+    duration: 30,
+  },
+  "+=5"
+);
+
+tl.to(".section-seven", {
+  scrollTrigger: {
+    trigger: ".section-seven",
+    start: "bottom top",
+    pin: false,
+  },
+});
