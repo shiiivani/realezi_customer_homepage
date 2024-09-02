@@ -169,7 +169,7 @@ button {
     gap: 6px;
     transition-duration: .3s;
     right: 25px;
-    top: 8px;
+    /* top: 8px; */
     z-index: 1000;
   }
   
