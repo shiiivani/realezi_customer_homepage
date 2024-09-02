@@ -247,8 +247,8 @@ button {
   left: 0;
   right: 0;
   background-color: #111F3C;
-  border-bottom-left-radius: 25px;
-  border-bottom-right-radius: 25px;
+  border-bottom-left-radius: 30px;
+  border-bottom-right-radius: 30px;
   border: none;
   z-index: 900;
  }
