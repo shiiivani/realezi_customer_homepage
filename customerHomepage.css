@@ -380,7 +380,7 @@ font-size: 0.9rem;
 
  .lower-nav.sticky + .mobile-nav {
 background-color: #111F3C;
-top: 20px;
+top: 30px;
 transform: translateY(-100%);
 border-bottom-left-radius: 25px;
 border-bottom-right-radius: 25px;

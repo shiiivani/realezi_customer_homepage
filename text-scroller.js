@@ -7,11 +7,10 @@ const tl = gsap.timeline({
     start: "top top",
     end: "bottom top",
     scrub: true,
-    pin: true, // Keeps the section pinned while animations are playing
+    pin: true,
   },
 });
 
-// Add the text scroller animation to the timeline
 tl.fromTo(
   ".text-scroller",
   { yPercent: 110, opacity: 0 },
@@ -24,7 +23,6 @@ tl.fromTo(
   }
 );
 
-// Add the section opacity change to the timeline after text scroller animations
 tl.to(
   ".section-seven-inner",
   {
@@ -32,10 +30,8 @@ tl.to(
     ease: "none",
     duration: 5,
   },
-  "-=5" // Start the fade-out just before the text scrollers finish
+  "-=5"
 );
-
-// Add the animation for the h3 text to slide up with the scroll
 tl.fromTo(
   ".section-seven h3",
   {
