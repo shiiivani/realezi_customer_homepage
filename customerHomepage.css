@@ -1213,6 +1213,21 @@ z-index: 2;
     width: 80%;
 }
 
+.read-more-btn {
+    color: #111F3c;
+    cursor: pointer;
+    font-size: 0.7rem;
+    white-space: nowrap;
+    position: absolute;
+    right: 15px;
+    bottom: 0;
+}
+
+.short-text-outer {
+    position: relative;
+}
+
+
 .animated-container {
     position: relative;
     height: 300px; 
@@ -2554,6 +2569,16 @@ font-size: 0.7rem;
 @media screen and (max-width: 445px) {
     .animated-container {
         height: 200px;
+    }
+    .animated-container-content button {
+        padding: 3px 5px;
+        font-size: 0.75rem;
+    }
+    .tablet-side-panel {
+        width: 30px;
+    }
+    .tablet-border-inner::before {
+        left: 30px;
     }
     .section-five .d-flex div:nth-child(2) {
         display: none;
