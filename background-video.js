@@ -20,44 +20,35 @@ document.addEventListener("DOMContentLoaded", function () {
     const videoData = videos[index];
     const isLoopingVideo = videoData.loop;
 
-    // Swap active and next videos
     const tempVideo = activeVideo;
     activeVideo = nextVideo;
     nextVideo = tempVideo;
 
-    // Set source and properties of the next video
     nextVideo.src = videoData.src;
     nextVideo.loop = videoData.loop;
     nextVideo.currentTime = 0;
     nextVideo.style.zIndex = "1";
     activeVideo.style.zIndex = "0";
 
-    // Play the video
     nextVideo.play();
 
-    // Handle non-looping videos
     if (!isLoopingVideo) {
       nextVideo.addEventListener("ended", onEnd);
     } else {
-      // Clear end event listener for looping videos
       nextVideo.removeEventListener("ended", onEnd);
     }
 
-    // Pause the currently active video
     activeVideo.pause();
   }
 
-  // Define the onEnd function outside of playVideo
   function onEnd() {
     if (currentIndex === 2) {
-      playVideo(3); // Switch to main~2(2) on loop after main~2.mp4 ends
+      playVideo(3);
     } else if (currentIndex === 3) {
-      playVideo(4); // Switch to main~3(3) on loop after main~3.mp4 ends
+      playVideo(4);
     } else if (currentIndex === 6) {
-      // Stop video playback, no more transitions
       nextVideo.removeEventListener("ended", onEnd);
 
-      // Ensure the last video stays on top
       nextVideo.style.zIndex = "1";
       activeVideo.style.zIndex = "0";
     }
@@ -69,13 +60,10 @@ document.addEventListener("DOMContentLoaded", function () {
       if (newIndex === 1) {
         playVideo(1);
       } else if (newIndex === 2) {
-        // Play main~2.mp4 and switch to main~2(2) on loop
         playVideo(2);
       } else if (newIndex === 3) {
-        // Play main~3.mp4 and switch to main~3(3) on loop
         playVideo(4);
       } else if (newIndex === 4) {
-        // Play main~8.mp4 and stop
         playVideo(6);
       }
     }
@@ -91,7 +79,6 @@ document.addEventListener("DOMContentLoaded", function () {
         const h1 = slide.querySelector("h1");
         const h1Rect = h1.getBoundingClientRect();
 
-        // Check if the h1 is within the slider's viewport
         if (h1Rect.bottom > sliderRect.top && h1Rect.top < sliderRect.bottom) {
           handleSlideChange(index);
         }
@@ -112,7 +99,7 @@ document.addEventListener("DOMContentLoaded", function () {
           });
         },
         { threshold: 0.5 }
-      ); // Trigger when 50% of the slide is visible
+      );
 
       document
         .querySelectorAll(".section-one-slider .slide")
@@ -120,7 +107,6 @@ document.addEventListener("DOMContentLoaded", function () {
           slideObserver.observe(slide);
         });
     } else {
-      // Fallback to scroll event if IntersectionObserver is not supported
       document
         .querySelector(".section-one-slider")
         .addEventListener("scroll", checkSlideVisibility);
