@@ -1447,7 +1447,7 @@ input[type="range"]::-webkit-slider-thumb {
 }
 
 .section-three .next-btn {
-  right: 10px;
+  right: 25px;
   top: 43%;
   padding: 2px 6px 6px 6px;
   /* transform: rotate(-90deg) */
@@ -3458,6 +3458,25 @@ input[type="range"]::-webkit-slider-thumb {
 }
 
 @media screen and (max-width: 420px) {
+  .section-three .video-container {
+    transition: transform 0.3s ease-in-out;
+  }
+
+  .section-three .video {
+    flex: 0 0 50%;
+    box-sizing: border-box;
+    padding: 10px;
+    margin: 0;
+  }
+  .video .volume-icon {
+    right: 25px;
+    bottom: 75px;
+  }
+  .section-three .video .d-flex {
+    width: 200px;
+    margin-right: auto;
+    margin-left: auto;
+  }
   .footer .upper-footer .columns > div:last-child li:nth-child(4) {
     left: 55%;
   }
