@@ -641,7 +641,7 @@ body::-webkit-scrollbar {
   padding: 10px 20px;
   box-shadow: 0px 4px 13px 0px #00000022;
   border-radius: 5px;
-  margin: 5px 15px 10px 0;
+  margin: 5px 15px 10px 0 !important;
 }
 
 .buy-rent-section p.active,
@@ -3454,6 +3454,27 @@ input[type="range"]::-webkit-slider-thumb {
   }
   .lower-upper ul li {
     margin-top: 5px;
+  }
+}
+
+@media screen and (min-width: 420px) {
+  .section-three .nav-btn {
+    display: none;
+  }
+  .section-three .video-container {
+    animation: video-scroll-right 5s linear infinite;
+  }
+  .section-three .video-container:hover {
+    animation-play-state: paused;
+  }
+
+  @keyframes video-scroll-right {
+    0% {
+      transform: translateX(0);
+    }
+    100% {
+      transform: translateX(-20%);
+    }
   }
 }
 
