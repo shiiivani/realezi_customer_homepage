@@ -274,3 +274,13 @@ const partyPopper = new rive.Rive({
     partyPopper.resizeDrawingSurfaceToCanvas();
   },
 });
+
+const partyPopper2 = new rive.Rive({
+  src: "./riv/partyPopper.riv",
+  canvas: document.getElementById("partyPopper2"),
+  autoplay: true,
+  stateMachines: "State Machine 1",
+  onLoad: () => {
+    partyPopper.resizeDrawingSurfaceToCanvas();
+  },
+});

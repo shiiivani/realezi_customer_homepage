@@ -35,7 +35,7 @@ listItems2.forEach((item) => {
 
 // Sticky Navbar
 document.addEventListener("DOMContentLoaded", function () {
-  if (window.innerWidth < 560) {
+  if (window.innerWidth < 577) {
     const lowerNav = document.querySelector(".lower-nav");
     const stickyClass = "sticky";
 

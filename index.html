@@ -22,7 +22,7 @@
 <body>
     <header>
         <nav class="nav">
-            <div class="upper-nav">
+            <div class="upper-nav d-none d-sm-block">
                 <div class="container d-flex align-items-start justify-content-between">
                     <ul class="upper-nav-left d-flex align-items-center">
                         <li class="active">Customer</li>
@@ -167,13 +167,13 @@
                     <li>Refer & Earn</li>
                     <li>Contact Us</li>
                 </ul>
-                <button>Post your property</button>
             </div>
         </nav>
     </header>
 
     <main>
-        <div class="section-one">
+        <!-- Section One -->
+        <div class="section-one d-none d-sm-block">
             <div class="container">
                 <video autoplay muted id="background-video">
                     <source src="./videos/business-intro.mov" type="video/mp4">
@@ -214,7 +214,226 @@
             </div>
         </div>
 
-        <div class="section-two">
+        <div class="filter-section-modal hide d-flex d-sm-none">
+            <div class="filter-section-inner">
+                <div class="search-section">
+                    <div class="d-flex align-items-center justify-content-between">
+                        <div class="d-flex align-items-center justify-content-start">
+                            <img src="./images/left-right.png" width="20px" alt="Left Arrow Icon" class="close-filters">
+                            <h6 class="mx-2">You’re searching in <span class="fw-medium">Vadodara</span></h6>
+                        </div>
+                        <div class="d-flex align-items-center justify-content-end">
+                            <p>Change City</p>
+                        </div>
+                    </div>
+                    <div class="search-engine position-relative">
+                        <input type="text" name="search" placeholder="Patel Nagar Bus Stop" autocomplete="off">
+                        <img src="./images/Search.png" width="20px" alt="Search Icon">
+                    </div>
+                </div>
+
+                <div class="filter-applied-section p-3">
+                    <div class="d-flex align-items-start justify-content-between">
+                        <h6>Filters applied</h6>
+                        <p id="clear-filter">Clear filters</p>
+                    </div>
+                    <div class="filters-applied d-flex align-items-center justify-content-start flex-wrap mt-3">
+                        <!-- <p>Patel Nagar Bus Stop<span><img src="./images/cross-blue.png" alt="Cross icon"
+                                    width="20px"></span></p> -->
+                    </div>
+                </div>
+
+                <div class="buy-rent-section p-3">
+                    <h6>I'm looking to</h6>
+                    <div class="d-flex align-items-center justify-content-start">
+                        <p class="active">Buy</p>
+                        <p>Rent</p>
+                    </div>
+                </div>
+
+                <div class="category-section p-3">
+                    <h6>Category</h6>
+                    <div class="d-flex align-items-center justify-content-start flex-wrap">
+                        <p class="active">Residential</p>
+                        <p>Commercial</p>
+                        <p>Plots</p>
+                        <p>PG</p>
+                        <p>Co-working space</p>
+                    </div>
+                </div>
+
+                <div class="property-type-section p-3">
+                    <h6>Property Type</h6>
+                    <ul>
+                        <li class="d-flex align-items-center">
+                            <input type="checkbox" name="property-type">
+                            <p>Apartment</p>
+                        </li>
+                        <li class="d-flex align-items-center">
+                            <input type="checkbox" name="property-type">
+                            <p>Duplex</p>
+                        </li>
+                        <li class="d-flex align-items-center">
+                            <input type="checkbox" name="property-type">
+                            <p>Villa</p>
+                        </li>
+                        <li class="d-flex align-items-center">
+                            <input type="checkbox" name="property-type">
+                            <p>Penthouse</p>
+                        </li>
+                        <li class="d-flex align-items-center">
+                            <input type="checkbox" name="property-type">
+                            <p>Studio</p>
+                        </li>
+                        <li class="d-flex align-items-center">
+                            <input type="checkbox" name="property-type">
+                            <p>Independent House</p>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="budget-section p-3">
+                    <h6>Budget</h6>
+                    <div class="range-slider position-relative">
+                        <div class="slider-values d-flex align-items-center justify-content-between">
+                            <p id="minValue">Rs.1Lakh</p>
+                            <p id="maxValue">Rs.2Cr+</p>
+                        </div>
+                        <input type="range" id="minSlider" min="1" max="200" value="1">
+                        <input type="range" id="maxSlider" min="1" max="200" value="200">
+                        <div class="slider-labels d-flex align-items-center justify-content-between">
+                            <span>1Lakh</span>
+                            <span>
+                                <div class='line'></div>40L
+                            </span>
+                            <span>
+                                <div class='line'></div>70L
+                            </span>
+                            <span>
+                                <div class='line'></div>1Cr
+                            </span>
+                            <span>
+                                <div class='line'></div>1.3Cr
+                            </span>
+                            <span>
+                                <div class='line'></div>1.6Cr
+                            </span>
+                            <span>2Cr+</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="advanced-filter-section mt-4">
+                    <h6 class="d-flex align-items-center advanced-filter-header mx-3">Show Advanced Filters<span
+                            class="d-block d-sm-none mx-2 mb-1"><svg width="10" height="8" viewBox="0 0 12 8"
+                                fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path
+                                    d="M1.41 0.590088L6 5.17009L10.59 0.590088L12 2.00009L6 8.00009L0 2.00009L1.41 0.590088Z"
+                                    fill="#0f46a6" />
+                            </svg></span></h6>
+
+                    <div class="posession-section p-3">
+                        <h6>Posession Status</h6>
+                        <ul>
+                            <li>
+                                <input type="radio" name="posession">
+                                <p>Ready to move</p>
+                            </li>
+                            <li>
+                                <input type="radio" name="posession">
+                                <p>In 1 year</p>
+                            </li>
+                            <li>
+                                <input type="radio" name="posession">
+                                <p>In 3 year</p>
+                            </li>
+                            <li>
+                                <input type="radio" name="posession">
+                                <p>Beyond 3 year</p>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="listed-section p-3">
+                        <h6>Listed By</h6>
+                        <div class="d-flex align-items-center justify-content-start flex-wrap">
+                            <p>Owner</p>
+                            <p>Developer</p>
+                        </div>
+                    </div>
+
+                    <div class="facing-section p-3">
+                        <h6>Facing</h6>
+                        <div class="d-flex align-items-center justify-content-start flex-wrap">
+                            <p>Nort Facing</p>
+                            <p>East Facing</p>
+                            <p>South Facing</p>
+                            <p>West Facing</p>
+                            <p>North-East Facing</p>
+                            <p>North-West Facing</p>
+                            <p>South-East Facing</p>
+                            <p>South-West Facing</p>
+                        </div>
+                    </div>
+
+                    <div class="property-age-section p-3">
+                        <h6>Age of property</h6>
+                        <ul>
+                            <li>
+                                <input type="radio" name="age">
+                                <p>Less than 1 year</p>
+                            </li>
+                            <li>
+                                <input type="radio" name="age">
+                                <p>Less than 3 years</p>
+                            </li>
+                            <li>
+                                <input type="radio" name="age">
+                                <p>Less than 5 years</p>
+                            </li>
+                            <li>
+                                <input type="radio" name="age">
+                                <p>Less than 10 years</p>
+                            </li>
+                            <li>
+                                <input type="radio" name="age">
+                                <p>More than 10 years</p>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <button class="blue-btn close-filters">View 1364 properties</button>
+            </div>
+        </div>
+
+        <div class="section-one-mobile-view d-flex d-sm-none align-items-center justify-content-center flex-column">
+            <div class="location-tag d-flex align-items-center">
+                <img src="./images/map-pin.png" width="13px" alt="Map pin">
+                <p class="mx-1">Vadodra</p>
+                <img src="./images/dropdown-white.png" width="15px" alt="Dropdown arrow icon">
+            </div>
+            <h1 class="text-center" id="typewriter-text">Real Estate Made Easy</h1>
+            <p class="text-center my-2">Properties to buy in Vadodara</p>
+            <div class="categories">
+                <ul>
+                    <li class="active">Buy</li>
+                    <li>Rent</li>
+                    <li>Commercial</li>
+                    <li>Plot</li>
+                    <li>PG</li>
+                </ul>
+            </div>
+            <div class="search-engine" id="open-filters">
+                <input type="text" name="search" placeholder="Search locality, landmark, building or project">
+                <img src="./images/Search.png" width="60px" alt="Search Icon">
+            </div>
+            <div class="bottom-container text-center">
+                <p>Are you an Owner? <span>Post your property</span><span><img src="./images/dropdown-white.png"
+                            alt="Dropdown icon" width="15px"></span></p>
+            </div>
+        </div>
+
+        <div class="section-two d-none d-sm-block">
             <div class="container">
                 <div class="section-two-nav">
                     <ul>
@@ -231,8 +450,8 @@
                         <p class="active">Buy</p>
                         <p id="rent-btn">Rent</p>
                     </div>
-                    <!-- <div
-                        class="properties-categories smaller-screen-categories mt-4 align-items-center justify-content-center">
+                    <div
+                        class="properties-categories larger-screen-categories my-3 align-items-center justify-content-center">
                         <div class="canvas-container">
                             <canvas id="residential" class="residential"></canvas>
                         </div>
@@ -248,7 +467,7 @@
                         <div class="canvas-container coworkingspace-container" id="coworkingspace-container">
                             <canvas id="coworkingspace" class="coworkingspace"></canvas>
                         </div>
-                    </div> -->
+                    </div>
                     <div class="search-container d-flex align-items-center">
                         <div class="dropdown">
                             <button class="dropdown-label d-flex align-items-center">
@@ -316,22 +535,47 @@
                         </button>
                     </div>
                 </div>
-                <div class="properties-categories larger-screen-categories align-items-center justify-content-center">
-                    <div class="canvas-container">
-                        <canvas id="residential" class="residential"></canvas>
-                    </div>
-                    <div class="canvas-container">
-                        <canvas id="commercial" class="commercial"></canvas>
-                    </div>
-                    <div class="canvas-container plot-container" id="plot-container">
-                        <canvas id="plot" class="plot"></canvas>
-                    </div>
-                    <div class="canvas-container pg-container" id="pg-container">
-                        <canvas id="pg" class="pg"></canvas>
-                    </div>
-                    <div class="canvas-container coworkingspace-container" id="coworkingspace-container">
-                        <canvas id="coworkingspace" class="coworkingspace"></canvas>
-                    </div>
+            </div>
+        </div>
+
+        <div class="section-two-mobile-view d-block d-sm-none">
+            <h2>Services & Tools</h2>
+            <div class="d-flex justify-content-center flex-wrap">
+                <div class="service-container text-center">
+                    <img src="./images/services-1.png" alt="" width="35px">
+                    <p>Architecture</p>
+                </div>
+                <div class="service-container text-center">
+                    <img src="./images/services-2.png" alt="" width="35px">
+                    <p>Interior Designing</p>
+                </div>
+                <div class="service-container text-center">
+                    <img src="./images/services-3.png" alt="" width="35px">
+                    <p>Bank Loan</p>
+                </div>
+                <div class="service-container text-center">
+                    <img src="./images/services-4.png" alt="" width="35px">
+                    <p>Solar Panels</p>
+                </div>
+                <div class="service-container text-center">
+                    <img src="./images/services-5.png" alt="" width="35px">
+                    <p>Legal Aid</p>
+                </div>
+                <div class="service-container text-center">
+                    <img src="./images/services-6.png" alt="" width="35px">
+                    <p>Packers & Movers</p>
+                </div>
+                <div class="service-container text-center">
+                    <img src="./images/services-7.png" alt="" width="35px">
+                    <p>Solar calculator</p>
+                </div>
+                <div class="service-container text-center">
+                    <img src="./images/services-8.png" alt="" width="35px">
+                    <p>EMI Calculator</p>
+                </div>
+                <div class="service-container text-center">
+                    <img src="./images/services-9.png" alt="" width="35px">
+                    <p>Loan eligibility calculator</p>
                 </div>
             </div>
         </div>
@@ -519,7 +763,7 @@
             </div>
         </div>
 
-        <div class="section-four py-5">
+        <div class="section-four py-5 d-none d-sm-block">
             <div class="container">
                 <h4 class="text-center">ANALYTICS FOR EVERYONE</h4>
                 <h2>From data to decisions</h2>
@@ -698,7 +942,28 @@
             </div>
         </div>
 
-        <div id="section-five" class="section-five">
+        <div class="section-four-mobile-view my-4 d-block d-sm-none">
+            <div class="horizontal-stripe d-flex align-items-center">
+                <img src="./images/ellipse-1.png" width="25px" alt="">
+                <img src="./images/ellipse-2.png" width="25px" alt="">
+                <img src="./images/ellipse-3.png" width="25px" alt="">
+                <p>More than 20 people have Earned Rs. 50,000 + by Referring</p>
+            </div>
+            <div class="refer-earn-container d-flex align-items-center-start justify-content-between">
+                <div class="refer-earn-left">
+                    <h3 class="mt-4">Get up to <span>₹ 30,000</span></h3>
+                    <h3>Per Refer</h3>
+                    <button>Refer and Earn</button>
+                </div>
+                <div class="refer-earn-right">
+                    <div>
+                        <img src="./images/rocket.png" width="100px" alt="Realezi Rocket image">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="section-five" class="section-five d-none d-sm-block">
             <div class="container">
                 <h2>Everyone has questions.<br>
                     We answer over 1 Million every day.
@@ -799,7 +1064,35 @@
             </div>
         </div>
 
-        <div class="section-six">
+        <div class="section-five-mobile-view px-3 d-block d-sm-none">
+            <h2>Recommended Collections</h2>
+            <div class="cards-container d-flex align-items-center justify-content-center position-relative">
+                <div class="recommended-card">
+                    <img src="./images/recommeded-1.jpg" width="100%" height="100%">
+                    <div class="d-flex align-items-center justify-content-between">
+                        <p>From Builders</p>
+                        <img src="./images/right-arrow-circle.png" width="20px">
+                    </div>
+                </div>
+                <div class="recommended-card">
+                    <img src="./images/recommeded-2.jpg" width="100%" height="100%">
+                    <div class="d-flex align-items-center justify-content-between">
+                        <p>From Owners</p>
+                        <img src="./images/right-arrow-circle.png" width="20px">
+                    </div>
+                </div>
+                <div class="recommended-card">
+                    <img src="./images/recommended-3.jpg" width="100%" height="100%">
+                    <div class="d-flex align-items-center justify-content-between">
+                        <p>From Tenants</p>
+                        <img src="./images/right-arrow-circle.png" width="20px">
+                    </div>
+                </div>
+                <button>View<br> more</button>
+            </div>
+        </div>
+
+        <div class="section-six d-none d-sm-block">
             <div class="container">
                 <div class="filter-container d-flex align-items-center justify-content-between">
                     <div class="blog-news-toggle-button d-flex align-items-center">
@@ -988,7 +1281,37 @@
             </div>
         </div>
 
-        <div class="section-seven">
+        <div class="section-six-mobile-view d-block d-sm-none">
+            <div class="tools-container d-flex justify-content-start">
+                <h2>Tools &<br>Insights</h2>
+
+                <div class="tools-card d-flex align-items-center justify-content-between">
+                    <img src="./images/tools-1.png" alt="Solar Calculator" width="100px">
+                    <div class="content text-left">
+                        <h4>Solar Calculator</h4>
+                        <p>Calculate your Solar Power hassle-free</p>
+                    </div>
+                </div>
+
+                <div class="tools-card d-flex align-items-center justify-content-between">
+                    <img src="./images/tools-2.png" alt="EMI Calculator" width="90px">
+                    <div class="content text-left">
+                        <h4>EMI Calculator</h4>
+                        <p>Calculate your Solar Power hassle-free</p>
+                    </div>
+                </div>
+
+                <div class="tools-card d-flex align-items-center justify-content-between">
+                    <img src="./images/tools-3.png" alt="EMI Calculator" width="90px">
+                    <div class="content text-left">
+                        <h4>Loan Calculator</h4>
+                        <p>Calculate your Solar Power hassle-free</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section-seven d-none d-sm-block">
             <div class="section-seven-inner">
                 <h2>Ready to grow with us?</h2>
                 <p class="description">Ready to grow with us Ready to grow with us? Ready to grow with us? Ready
@@ -1016,29 +1339,151 @@
                 all the answers!</h3>
         </div>
 
-        <div class="section-eight py-5">
+        <div class="section-seven-mobile-view d-block d-sm-none">
+            <div class="plans-container d-flex justify-content-start">
+                <h2>Custom <br>Plans</h2>
+
+                <div class="plans-card text-center d-flex align-items-center justify-content-center flex-column">
+                    <img src="./images/plans-1.png" alt="" width="110px">
+                    <h4>Dedicated Relationship Manager</h4>
+                </div>
+
+                <div class="plans-card text-center d-flex align-items-center justify-content-center flex-column">
+                    <img src="./images/plans-2.png" alt="" width="110px">
+                    <h4>Zero Brokerage Properties</h4>
+                </div>
+
+                <div class="plans-card text-center d-flex align-items-center justify-content-center flex-column">
+                    <img src="./images/plans-3.png" alt="" width="110px">
+                    <h4>Property Listings</h4>
+                </div>
+
+                <div class="plans-card text-center d-flex align-items-center justify-content-center flex-column">
+                    <img class="mt-4" src="./images/plans-4.png" alt="" width="70px">
+                    <h4>Explore More</h4>
+                </div>
+            </div>
+        </div>
+
+        <div class="section-eight py-5 d-none d-sm-flex">
             <div class="container">
                 <h2>We'll help you get started</h2>
                 <button>Let's Build</button>
             </div>
         </div>
+
+        <div class="section-eight-mobile-view px-3 d-block d-sm-none">
+            <h2>Looking for Something Else?</h2>
+            <div class="d-flex align-items-center justify-content-between">
+                <img src="./images/property-on-sale.png" width="100px" alt="">
+                <div>
+                    <h4>Sell Your Property</h4>
+                    <p>Got a property? List it and get site visits instantly.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="section-nine-mobile-view px-3 text-right d-block d-sm-none">
+            <div class="d-flex align-items-end justify-content-between">
+                <h2>Blogs</h2>
+                <a href="#">See all</a>
+            </div>
+            <div class="blog-grid">
+                <div class="grid-item item1 position-relative">
+                    <img src="./images/blog-img-1.png" alt="" width="100%" height="100%">
+                    <p>Walk through 10 mind-blowing heritage
+                        monuments. </p>
+                    <a href="#">Read More</a>
+                </div>
+                <div class="grid-item item2 position-relative">
+                    <img src="./images/blog-img-2.jpeg" alt="" width="100%" height="100%">
+                    <p>Walk through 10 mind-blowing heritage
+                        monuments. </p>
+                    <a href="#">Read More</a>
+                </div>
+                <div class="grid-item item3 position-relative">
+                    <img src="./images/blog-img-3.jpeg" alt="" width="100%" height="100%">
+                    <p>Walk through 10 mind-blowing heritage
+                        monuments. </p>
+                    <a href="#">Read More</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="section-ten-mobile-view px-3 d-block d-sm-none">
+            <div class="d-flex align-items-end justify-content-between">
+                <h2>News</h2>
+                <a href="#">See all</a>
+            </div>
+            <div class="news-slider d-flex">
+                <div class="news-card d-flex align-items-center justify-content-between">
+                    <img src="./images/recommended-3.jpg" alt="">
+                    <div class="content">
+                        <h5>Emprendedurismo. Propósito e incertidumbre, dos fuerzas a favor de </h5>
+                        <p> Descubre cómo el propósito y la incertidumbre pueden ser dos fuerzas poderosas a favor de
+                            las organizaciones.</p>
+                    </div>
+                </div>
+                <div class="news-card d-flex align-items-center justify-content-between">
+                    <img src="./images/recommeded-2.jpg" alt="">
+                    <div class="content">
+                        <h5>Emprendedurismo. Propósito e incertidumbre, dos fuerzas a favor de </h5>
+                        <p> Descubre cómo el propósito y la incertidumbre pueden ser dos fuerzas poderosas a favor de
+                            las organizaciones.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section-eleven-mobile-view text-center px-3 d-block d-sm-none">
+            <div class="d-flex align-items-end justify-content-between">
+                <h2>Customer Reviews</h2>
+                <a href="#">See all</a>
+            </div>
+            <div class="customer-review-slider d-flex justify-content-center">
+                <div class="customer-review-card">
+                    <img src="./images/ellipse-1.png" alt="" width="60px">
+                    <p>Really one of the best experience of property purchasing. Seamless and hassle-free experience.
+                        Seamless and hassle-free experience.</p>
+                    <p class="fw-semibold">Dr. Ketan Rao</p>
+                </div>
+                <div class="customer-review-card">
+                    <img src="./images/ellipse-1.png" alt="" width="60px">
+                    <p>Really one of the best experience of property purchasing. Seamless and hassle-free experience.
+                        Seamless and hassle-free experience.</p>
+                    <p class="fw-semibold">Dr. Ketan Rao</p>
+                </div>
+                <div class="customer-review-card">
+                    <img src="./images/ellipse-1.png" alt="" width="60px">
+                    <p>Really one of the best experience of property purchasing. Seamless and hassle-free experience.
+                        Seamless and hassle-free experience.</p>
+                    <p class="fw-semibold">Dr. Ketan Rao</p>
+                </div>
+            </div>
+        </div>
     </main>
 
-    <footer class="footer ">
+    <footer class="footer mt-5">
         <div class="container">
             <div class="upper-footer">
                 <div class="columns d-flex align-items-start justify-content-between my-3">
                     <div>
-                        <img src="./images/logo2.png" width="150px" class="mb-3" />
+                        <img src="./images/logo.png" width="150px" class="mb-3" />
                         <h3>
                             Connecting You to Your<br />
                             Dream Property.
                         </h3>
                         <button class="white-btn">Try it yourself</button>
                     </div>
-                    <div class="d-flex align-items-start justify-content-between position-relative">
+                    <div class="">
                         <div>
-                            <h4>Company</h4>
+                            <h4 class="d-flex align-items-center">Company <span class="d-block d-sm-none mx-2 mb-1"><svg
+                                        width="14" height="10" viewBox="0 0 12 8" fill="none"
+                                        xmlns="http://www.w3.org/2000/svg">
+                                        <path
+                                            d="M1.41 0.590088L6 5.17009L10.59 0.590088L12 2.00009L6 8.00009L0 2.00009L1.41 0.590088Z"
+                                            fill="#ffffff" />
+                                    </svg></span></h4>
                             <ul>
                                 <li>About us</li>
                                 <li>Blog</li>
@@ -1046,27 +1491,11 @@
                                 <li>Contact support</li>
                                 <li>Get in touch</li>
                                 <li>FAQs</li>
-                                <div class="d-flex align-items-center justify-content-between">
-                                    <button class="align-items-center justify-content-center blue-btn mt-3">
-                                        <p class="mx-2">We are hiring</p>
-                                        <canvas id="partyPopper"></canvas>
-                                    </button>
-                                    <button
-                                        class="smaller-screen-refer-button align-items-center blue-btn refer-btn mt-3">
-                                        <p class="mx-2">Refer & Earn</p>
-                                        <lottie-player src="./animation-files/fire-animation.json"
-                                            background="transparent" speed="1" style="width: 25px; height: 25px" loop
-                                            autoplay></lottie-player>
-                                    </button>
-                                </div>
-
-                            </ul>
-                        </div>
-                        <div class="mobile-view-list">
-                            <h4>Community</h4>
-                            <ul class="text-right">
-                                <li>Realezi Community</li>
-                                <li>Customers</li>
+                                <button
+                                    class="align-items-center justify-content-center blue-btn mt-3 d-none d-sm-block">
+                                    <p class="mx-2">We are hiring</p>
+                                    <canvas id="partyPopper"></canvas>
+                                </button>
                             </ul>
                         </div>
                     </div>
@@ -1106,7 +1535,13 @@
                         </a>
                     </div>
                     <div>
-                        <h4>Solutions</h4>
+                        <h4 class="d-flex align-items-center">Solutions<span class="d-block d-sm-none mx-2 mb-1"><svg
+                                    width="14" height="10" viewBox="0 0 12 8" fill="none"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <path
+                                        d="M1.41 0.590088L6 5.17009L10.59 0.590088L12 2.00009L6 8.00009L0 2.00009L1.41 0.590088Z"
+                                        fill="#ffffff" />
+                                </svg></span></h4>
                         <div class="d-flex">
                             <ul>
                                 <li>Find a Right Property</li>
@@ -1115,8 +1550,11 @@
                                 <li>Interior Designing & Decor</li>
                                 <li>Solar Panel</li>
                                 <li>Home Loans</li>
+                                <li class="d-block d-sm-none">Legal Aid </li>
+                                <li class="d-block d-sm-none">Porter Services</li>
+                                <li class="d-block d-sm-none">For Business</li>
                             </ul>
-                            <ul class="px-3">
+                            <ul class="px-3 d-none d-sm-block">
                                 <li>Legal Aid </li>
                                 <li>Porter Services</li>
                                 <li>For Business</li>
@@ -1124,9 +1562,15 @@
                         </div>
                     </div>
                     <div>
-                        <h4>Community</h4>
+                        <h4 class="d-flex align-items-center">Community<span class="d-block d-sm-none mx-2 mb-1"><svg
+                                    width="14" height="10" viewBox="0 0 12 8" fill="none"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <path
+                                        d="M1.41 0.590088L6 5.17009L10.59 0.590088L12 2.00009L6 8.00009L0 2.00009L1.41 0.590088Z"
+                                        fill="#ffffff" />
+                                </svg></span></h4>
                         <ul>
-                            <button class="align-items-center blue-btn refer-btn mt-3">
+                            <button class="align-items-center blue-btn refer-btn mt-3 d-none d-sm-block">
                                 <p class="mx-2">Refer & Earn</p>
                                 <lottie-player src="./animation-files/fire-animation.json" background="transparent"
                                     speed="1" style="width: 25px; height: 25px" loop autoplay></lottie-player>
@@ -1135,47 +1579,73 @@
                             <li>Customers</li>
                         </ul>
                     </div>
-                </div>
-                <div>
-
-                    <div class="playStore-btn smaller-screen d-flex align-items-center justify-content-between">
-                        <a href="#" class="googlePlay-button" id="launch-button">
-                            <span class="icon">
-                                <svg fill="currentcolor" viewBox="-52.01 0 560.035 560.035"
-                                    xmlns="http://www.w3.org/2000/svg" stroke="#ffffff">
-                                    <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
-                                    <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round">
-                                    </g>
-                                    <g id="SVGRepo_iconCarrier">
-                                        <path
-                                            d="M380.844 297.529c.787 84.752 74.349 112.955 75.164 113.314-.622 1.988-11.754 40.191-38.756 79.652-23.343 34.117-47.568 68.107-85.731 68.811-37.499.691-49.557-22.236-92.429-22.236-42.859 0-56.256 21.533-91.753 22.928-36.837 1.395-64.889-36.891-88.424-70.883-48.093-69.53-84.846-196.475-35.496-282.165 24.516-42.554 68.328-69.501 115.882-70.192 36.173-.69 70.315 24.336 92.429 24.336 22.1 0 63.59-30.096 107.208-25.676 18.26.76 69.517 7.376 102.429 55.552-2.652 1.644-61.159 35.704-60.523 106.559M310.369 89.418C329.926 65.745 343.089 32.79 339.498 0 311.308 1.133 277.22 18.785 257 42.445c-18.121 20.952-33.991 54.487-29.709 86.628 31.421 2.431 63.52-15.967 83.078-39.655">
-                                        </path>
-                                    </g>
-                                </svg>
-                            </span>
-                            <span class="texts">
-                                <span class="text-1">Download form</span>
-                                <span class="text-2">App store</span>
-                            </span>
-                        </a>
-                        <a href="#" class="appstore-button">
-                            <svg viewBox="0 0 512 512" class="icon" fill="currentColor"
-                                xmlns="http://www.w3.org/2000/svg">
-                                <path
-                                    d="M99.617 8.057a50.191 50.191 0 00-38.815-6.713l230.932 230.933 74.846-74.846L99.617 8.057zM32.139 20.116c-6.441 8.563-10.148 19.077-10.148 30.199v411.358c0 11.123 3.708 21.636 10.148 30.199l235.877-235.877L32.139 20.116zM464.261 212.087l-67.266-37.637-81.544 81.544 81.548 81.548 67.273-37.64c16.117-9.03 25.738-25.442 25.738-43.908s-9.621-34.877-25.749-43.907zM291.733 279.711L60.815 510.629c3.786.891 7.639 1.371 11.492 1.371a50.275 50.275 0 0027.31-8.07l266.965-149.372-74.849-74.847z">
-                                </path>
-                            </svg>
-                            <span class="texts">
-                                <span class="text-1">GET IT ON</span>
-                                <span class="text-2">Google Play</span>
-                            </span>
-                        </a>
+                    <div class="d-block d-sm-none">
+                        <h4 class="d-flex align-items-center">Others<span class="d-block d-sm-none mx-2 mb-1"><svg
+                                    width="14" height="10" viewBox="0 0 12 8" fill="none"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <path
+                                        d="M1.41 0.590088L6 5.17009L10.59 0.590088L12 2.00009L6 8.00009L0 2.00009L1.41 0.590088Z"
+                                        fill="#ffffff" />
+                                </svg></span></h4>
+                        <div class="position-relative">
+                            <ul>
+                                <li>Privacy policies</li>
+                                <li>Terms and conditions</li>
+                                <li>Disclaimer</li>
+                                <li class="text-right">
+                                    <button class="align-items-center justify-content-center blue-btn">
+                                        <p class="mx-2">We are hiring</p>
+                                        <canvas id="partyPopper2"></canvas>
+                                    </button>
+                                    <button class="align-items-center blue-btn refer-btn mt-3">
+                                        <p class="mx-2">Refer & Earn</p>
+                                        <lottie-player src="./animation-files/fire-animation.json"
+                                            background="transparent" speed="1" style="width: 25px; height: 25px" loop
+                                            autoplay></lottie-player>
+                                    </button>
+                                </li>
+                                <li class="d-flex align-items-center justify-content-center"><a href="#"
+                                        class="googlePlay-button" id="launch-button">
+                                        <span class="icon">
+                                            <svg fill="currentcolor" viewBox="-52.01 0 560.035 560.035"
+                                                xmlns="http://www.w3.org/2000/svg" stroke="#ffffff">
+                                                <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                                                <g id="SVGRepo_tracerCarrier" stroke-linecap="round"
+                                                    stroke-linejoin="round">
+                                                </g>
+                                                <g id="SVGRepo_iconCarrier">
+                                                    <path
+                                                        d="M380.844 297.529c.787 84.752 74.349 112.955 75.164 113.314-.622 1.988-11.754 40.191-38.756 79.652-23.343 34.117-47.568 68.107-85.731 68.811-37.499.691-49.557-22.236-92.429-22.236-42.859 0-56.256 21.533-91.753 22.928-36.837 1.395-64.889-36.891-88.424-70.883-48.093-69.53-84.846-196.475-35.496-282.165 24.516-42.554 68.328-69.501 115.882-70.192 36.173-.69 70.315 24.336 92.429 24.336 22.1 0 63.59-30.096 107.208-25.676 18.26.76 69.517 7.376 102.429 55.552-2.652 1.644-61.159 35.704-60.523 106.559M310.369 89.418C329.926 65.745 343.089 32.79 339.498 0 311.308 1.133 277.22 18.785 257 42.445c-18.121 20.952-33.991 54.487-29.709 86.628 31.421 2.431 63.52-15.967 83.078-39.655">
+                                                    </path>
+                                                </g>
+                                            </svg>
+                                        </span>
+                                        <span class="texts">
+                                            <span class="text-1">Download form</span>
+                                            <span class="text-2">App store</span>
+                                        </span>
+                                    </a>
+                                    <a href="#" class="appstore-button">
+                                        <svg viewBox="0 0 512 512" class="icon" fill="currentColor"
+                                            xmlns="http://www.w3.org/2000/svg">
+                                            <path
+                                                d="M99.617 8.057a50.191 50.191 0 00-38.815-6.713l230.932 230.933 74.846-74.846L99.617 8.057zM32.139 20.116c-6.441 8.563-10.148 19.077-10.148 30.199v411.358c0 11.123 3.708 21.636 10.148 30.199l235.877-235.877L32.139 20.116zM464.261 212.087l-67.266-37.637-81.544 81.544 81.548 81.548 67.273-37.64c16.117-9.03 25.738-25.442 25.738-43.908s-9.621-34.877-25.749-43.907zM291.733 279.711L60.815 510.629c3.786.891 7.639 1.371 11.492 1.371a50.275 50.275 0 0027.31-8.07l266.965-149.372-74.849-74.847z">
+                                            </path>
+                                        </svg>
+                                        <span class="texts">
+                                            <span class="text-1">GET IT ON</span>
+                                            <span class="text-2">Google Play</span>
+                                        </span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
                     </div>
                 </div>
             </div>
 
             <div class="lower-footer">
-                <div class="lower-upper">
+                <div class="lower-upper d-none d-sm-block">
                     <ul class="d-flex align-items-center justify-content-center">
                         <li>Privacy policies</li>
                         <li>Terms and conditions</li>
@@ -1206,7 +1676,7 @@
                             <span class="text">Instagram</span>
                         </button>
                         <button class="youtube-btn social-btn">
-                            <img src="./images/youtube-triangle.png" width="10px" />
+                            <img src="./images/youtube.png" width="10px" />
                             <span class="text">Youtube</span>
                         </button>
                     </div>
@@ -1214,69 +1684,8 @@
             </div>
         </div>
     </footer>
-    <script>
-        // Play store Buttons
-        document.addEventListener("DOMContentLoaded", function () {
-            // Handle all Google Play Buttons
-            const googlePlayButtons = document.querySelectorAll(".googlePlay-button");
-            const googlePlayOriginalText1 = "Download from";
-            const googlePlayOriginalText2 = "Google Play";
-
-            googlePlayButtons.forEach((button) => {
-                button.addEventListener("click", function (event) {
-                    event.preventDefault();
-
-                    const googlePlayText1 = button.querySelector(".text-1");
-                    const googlePlayText2 = button.querySelector(".text-2");
-                    const googlePlayIcon = button.querySelector(".icon");
-
-                    googlePlayText1.textContent = "Launching";
-                    googlePlayText2.textContent = "Soon";
-                    googlePlayText1.classList.add("launch-text");
-                    googlePlayText2.classList.add("soon-text");
-                    googlePlayIcon.style.display = "none";
-
-                    setTimeout(function () {
-                        googlePlayText1.textContent = googlePlayOriginalText1;
-                        googlePlayText2.textContent = googlePlayOriginalText2;
-                        googlePlayText1.classList.remove("launch-text");
-                        googlePlayText2.classList.remove("soon-text");
-                        googlePlayIcon.style.display = "";
-                    }, 3000);
-                });
-            });
-
-            // Handle all App Store Buttons
-            const appstoreButtons = document.querySelectorAll(".appstore-button");
-            const appstoreOriginalText1 = "Download from";
-            const appstoreOriginalText2 = "App Store";
-
-            appstoreButtons.forEach((button) => {
-                button.addEventListener("click", function (event) {
-                    event.preventDefault();
-
-                    const appstoreText1 = button.querySelector(".text-1");
-                    const appstoreText2 = button.querySelector(".text-2");
-                    const appstoreIcon = button.querySelector(".icon");
-
-                    appstoreText1.textContent = "Launching";
-                    appstoreText2.textContent = "Soon";
-                    appstoreText1.classList.add("launch-text");
-                    appstoreText2.classList.add("soon-text");
-                    appstoreIcon.style.display = "none";
-
-                    setTimeout(function () {
-                        appstoreText1.textContent = appstoreOriginalText1;
-                        appstoreText2.textContent = appstoreOriginalText2;
-                        appstoreText1.classList.remove("launch-text");
-                        appstoreText2.classList.remove("soon-text");
-                        appstoreIcon.style.display = "";
-                    }, 3000);
-                });
-            });
-        });
-    </script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script defer src="./footer.js"></script>
     <script defer src="./navbar.js"></script>
     <script defer src="./background-video.js"></script>
     <script defer src="./section-two.js"></script>
@@ -1293,6 +1702,8 @@
     <script defer src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
     <script defer src="./rive-animations.js"></script>
     <script defer src="section-transition.js"></script>
+    <script defer src="./mobile-view.js"></script>
+    <script defer src="./filter-section.js"></script>
 </body>
 
 </html>
