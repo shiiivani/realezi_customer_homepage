@@ -826,10 +826,10 @@ body::-webkit-scrollbar {
 }
 
 .section-one-mobile-view .categories ul li {
-  padding: 4px 10px;
+  padding: 5px 10px 9px 10px;
   color: #111f3c;
   border-radius: 20px;
-  margin: 10px 5px;
+  margin: 6px 5px;
   white-space: nowrap;
   transition: background-color 0.3s ease;
   position: relative;
@@ -870,15 +870,16 @@ body::-webkit-scrollbar {
   border-radius: 25px;
   padding: 15px;
   background: #ffffffeb;
+  font-size: 0.8rem;
 }
 
 .section-one-mobile-view .search-engine img {
-  padding: 8px 15px;
-  border-radius: 25px;
+  padding: 8px 10px;
+  border-radius: 20px;
   background-color: #111f3c;
   position: absolute;
   right: 7px;
-  top: 13.5px;
+  top: 14.3px;
 }
 
 .section-one-mobile-view .bottom-container {
@@ -1353,6 +1354,14 @@ input[type="range"]::-webkit-slider-thumb {
 .section-three .video p {
   text-align: left;
   font-size: 0.78rem;
+}
+
+.Embed .Header,
+.section-three .video .HoverCard,
+.section-three .video .Feedback,
+.section-three .video .SocialProof,
+.section-three .video .Footer {
+  display: none;
 }
 
 .section-three video {
