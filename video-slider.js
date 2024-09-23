@@ -58,7 +58,7 @@ document.addEventListener("DOMContentLoaded", function () {
   );
 
   videoContainers.forEach((videoContainer) => {
-    const video = videoContainer.querySelector("video");
+    const video = videoContainer.querySelector(".instagram-video");
     const volumeCont = videoContainer.querySelector(".volume-container");
     const volumeUpIcon = videoContainer.querySelector(".volume-up");
     const volumeOffIcon = videoContainer.querySelector(".volume-off");
@@ -69,105 +69,108 @@ document.addEventListener("DOMContentLoaded", function () {
 
     videoContainer.addEventListener("mouseover", function () {
       videoWrapper.style.animationPlayState = "paused";
-      volumeCont.classList.remove("hidden");
+      // volumeCont.classList.remove("hidden");
     });
 
     videoContainer.addEventListener("mouseout", function () {
       videoWrapper.style.animationPlayState = "running";
-      volumeCont.classList.add("hidden");
+      // volumeCont.classList.add("hidden");
     });
 
     volumeUpIcon.addEventListener("click", function () {
       video.muted = true;
       volumeUpIcon.classList.add("hidden");
-      volumeOffIcon.classList.remove("hidden");
+      // volumeOffIcon.classList.remove("hidden");
     });
 
     volumeOffIcon.addEventListener("click", function () {
       video.muted = false;
-      volumeOffIcon.classList.add("hidden");
-      volumeUpIcon.classList.remove("hidden");
+      // volumeOffIcon.classList.add("hidden");
+      // volumeUpIcon.classList.remove("hidden");
     });
   });
 });
 
-document.addEventListener("DOMContentLoaded", () => {
-  const sliders = document.querySelectorAll(".video-slider");
+const sliders = document.querySelectorAll(".video-slider");
 
-  sliders.forEach((slider) => {
-    const container = slider.querySelector(".video-container");
-    const videos = slider.querySelectorAll(".video");
-    const prevBtn = slider.querySelector(".prev-btn");
-    const nextBtn = slider.querySelector(".next-btn");
-    let index = 0;
-    let startX = 0;
-    let isDragging = false;
+sliders.forEach((slider) => {
+  const container = slider.querySelector(".video-container");
+  const videos = slider.querySelectorAll(".video");
+  const prevBtn = slider.querySelector(".prev-btn");
+  const nextBtn = slider.querySelector(".next-btn");
+  let index = 0;
+  let isDragging = false;
+  let startX = 0;
+  let scrollLeft = 0;
 
-    const updateSlider = () => {
-      container.style.transform = `translateX(-${index * 60}%)`;
-    };
+  // Function to update the slider when buttons are clicked
+  const updateSlider = () => {
+    const videoWidth = videos[0].clientWidth; // Get the width of one video
+    container.style.scrollBehavior = "smooth"; // Enable smooth scrolling
+    container.scrollLeft = index * videoWidth; // Scroll to the correct position
+  };
 
-    const checkScreenSize = () => {
-      if (window.innerWidth <= 420) {
-        prevBtn.style.display = "block";
-        nextBtn.style.display = "block";
+  const slidePrev = () => {
+    if (index > 0) {
+      index--; // Decrease the index to move to the previous video
+    }
+    updateSlider();
+  };
 
-        prevBtn.addEventListener("click", slidePrev);
-        nextBtn.addEventListener("click", slideNext);
-      } else {
-        prevBtn.style.display = "none";
-        nextBtn.style.display = "none";
+  const slideNext = () => {
+    if (index < videos.length - 1) {
+      index++; // Increase the index to move to the next video
+    }
+    updateSlider();
+  };
 
-        prevBtn.removeEventListener("click", slidePrev);
-        nextBtn.removeEventListener("click", slideNext);
-      }
-    };
+  // Drag/Swipe functionality for thumb responsiveness
+  const startDragging = (e) => {
+    isDragging = true;
+    startX = e.pageX || e.touches[0].pageX;
+    scrollLeft = container.scrollLeft;
+  };
 
-    const slidePrev = () => {
-      if (index > 0) {
-        index--;
-        updateSlider();
-      }
-    };
+  const stopDragging = () => {
+    isDragging = false;
+  };
 
-    const slideNext = () => {
-      if (index < videos.length - 1) {
-        index++;
-        updateSlider();
-      }
-    };
+  const dragSlider = (e) => {
+    if (!isDragging) return;
+    e.preventDefault();
+    const x = e.pageX || e.touches[0].pageX;
+    const walk = (x - startX) * 2; // Multiply by 2 for faster drag response
+    container.scrollLeft = scrollLeft - walk;
+  };
 
-    // Touch event handlers for swiping
-    const handleTouchStart = (e) => {
-      startX = e.touches[0].clientX;
-      isDragging = true;
-    };
+  // Event listeners for buttons
+  prevBtn.addEventListener("click", slidePrev);
+  nextBtn.addEventListener("click", slideNext);
 
-    const handleTouchMove = (e) => {
-      if (!isDragging) return;
+  // Event listeners for dragging/swiping
+  container.addEventListener("mousedown", startDragging);
+  container.addEventListener("mouseleave", stopDragging);
+  container.addEventListener("mouseup", stopDragging);
+  container.addEventListener("mousemove", dragSlider);
 
-      const touchX = e.touches[0].clientX;
-      const deltaX = touchX - startX;
+  container.addEventListener("touchstart", startDragging);
+  container.addEventListener("touchend", stopDragging);
+  container.addEventListener("touchmove", dragSlider);
 
-      if (deltaX > 50) {
-        slidePrev();
-        isDragging = false; // Prevents multiple slides in a single swipe
-      } else if (deltaX < -50) {
-        slideNext();
-        isDragging = false;
-      }
-    };
+  // Function to handle screen size and buttons visibility
+  const checkScreenSize = () => {
+    if (window.innerWidth <= 420) {
+      prevBtn.style.display = "block";
+      nextBtn.style.display = "block";
+    } else {
+      prevBtn.style.display = "none";
+      nextBtn.style.display = "none";
+    }
+  };
 
-    const handleTouchEnd = () => {
-      isDragging = false;
-    };
+  // Check screen size initially
+  checkScreenSize();
 
-    // Add touch event listeners to the container
-    container.addEventListener("touchstart", handleTouchStart);
-    container.addEventListener("touchmove", handleTouchMove);
-    container.addEventListener("touchend", handleTouchEnd);
-
-    window.addEventListener("resize", checkScreenSize);
-    checkScreenSize();
-  });
+  // Add event listener to handle screen resize
+  window.addEventListener("resize", checkScreenSize);
 });
