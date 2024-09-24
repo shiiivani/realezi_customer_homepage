@@ -492,7 +492,7 @@ body::-webkit-scrollbar {
 .section-one-bottom-outer {
   border-top: 1px solid #fff;
   position: relative;
-  bottom: 90px;
+  bottom: 60px;
   margin-left: auto;
   margin-right: auto;
   z-index: 3;
@@ -3293,6 +3293,12 @@ input[type="range"]::-webkit-slider-thumb {
   }
   .lower-nav li {
     margin-right: 25px;
+  }
+}
+
+@media screen and (min-width: 577px) {
+  .toggle {
+    display: none;
   }
 }
 

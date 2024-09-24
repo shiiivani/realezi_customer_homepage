@@ -3,72 +3,63 @@ document.addEventListener("DOMContentLoaded", function () {
   const video2 = document.getElementById("background-video-2");
 
   const videos = [
-    { src: "./videos/business-intro.mov", loop: false }, // Slide 1
-    { src: "./videos/main(1).mp4", loop: true }, // Slide 2
-    { src: "./videos/main~2.mp4", loop: false }, // Slide 3 - Video 1
-    { src: "./videos/main~2(2).mp4", loop: true }, // Slide 3 - Video 2 (loop)
-    { src: "./videos/main~3.mp4", loop: false }, // Slide 4 - Video 1
-    { src: "./videos/main~3(3).mp4", loop: true }, // Slide 4 - Video 2 (loop)
-    { src: "./videos/main~8.mp4", loop: false }, // Slide 5
+    { src: "./videos/main~1.mp4", loop: false }, // Slide 1
+    { src: "./videos/main~2.mp4", loop: false }, // Slide 2
+    { src: "./videos/main~3.mp4", loop: false }, // Slide 3
+    { src: "./videos/main~4.mp4", loop: false }, // Slide 4
+    { src: "./videos/main~5.mp4", loop: false }, // Slide 5
+    { src: "./videos/main~6.mp4", loop: false }, // Slide 6
+    { src: "./videos/main~7.mp4", loop: false }, // Slide 7
   ];
 
   let currentIndex = -1;
   let activeVideo = video1;
   let nextVideo = video2;
 
+  // Function to play video based on slide index
   function playVideo(index) {
     const videoData = videos[index];
-    const isLoopingVideo = videoData.loop;
 
+    // Swap the videos
     const tempVideo = activeVideo;
     activeVideo = nextVideo;
     nextVideo = tempVideo;
 
+    // Set the next video source and properties
     nextVideo.src = videoData.src;
     nextVideo.loop = videoData.loop;
-    nextVideo.currentTime = 0;
-    nextVideo.style.zIndex = "1";
-    activeVideo.style.zIndex = "0";
+    nextVideo.currentTime = 0; // Reset to the start
+    nextVideo.style.zIndex = "1"; // Bring the next video to the front
+    activeVideo.style.zIndex = "0"; // Send the active video to the back
 
+    // Play the next video
     nextVideo.play();
 
-    if (!isLoopingVideo) {
+    // Handle the end event for non-looping videos
+    if (!videoData.loop) {
       nextVideo.addEventListener("ended", onEnd);
     } else {
       nextVideo.removeEventListener("ended", onEnd);
     }
 
+    // Pause the active video
     activeVideo.pause();
   }
 
+  // Function to handle video end event
   function onEnd() {
-    if (currentIndex === 2) {
-      playVideo(3);
-    } else if (currentIndex === 3) {
-      playVideo(4);
-    } else if (currentIndex === 6) {
-      nextVideo.removeEventListener("ended", onEnd);
-
-      nextVideo.style.zIndex = "1";
-      activeVideo.style.zIndex = "0";
-    }
+    // Logic can be added here if needed when a video ends
   }
 
+  // Handle slide changes
   function handleSlideChange(newIndex) {
     if (newIndex !== currentIndex) {
       currentIndex = newIndex;
-      if (newIndex === 1) {
-        playVideo(1);
-      } else if (newIndex === 2) {
-        playVideo(2);
-      } else if (newIndex === 3) {
-        playVideo(4);
-      } else if (newIndex === 4) {
-        playVideo(6);
-      }
+      playVideo(currentIndex);
     }
   }
 
+  // Check which slide is currently visible
   function checkSlideVisibility() {
     const sliderRect = document
       .querySelector(".section-one-slider")
@@ -79,12 +70,14 @@ document.addEventListener("DOMContentLoaded", function () {
         const h1 = slide.querySelector("h1");
         const h1Rect = h1.getBoundingClientRect();
 
+        // If the slide is visible in the viewport, trigger slide change
         if (h1Rect.bottom > sliderRect.top && h1Rect.top < sliderRect.bottom) {
           handleSlideChange(index);
         }
       });
   }
 
+  // Initialize slide observer for visibility tracking
   function initSlideObserver() {
     if ("IntersectionObserver" in window) {
       const slideObserver = new IntersectionObserver(
@@ -94,11 +87,11 @@ document.addEventListener("DOMContentLoaded", function () {
               const index = Array.from(
                 document.querySelectorAll(".section-one-slider .slide")
               ).indexOf(entry.target);
-              handleSlideChange(index);
+              handleSlideChange(index); // Handle slide change when visible
             }
           });
         },
-        { threshold: 0.5 }
+        { threshold: 0.5 } // Trigger when half the slide is visible
       );
 
       document
@@ -107,6 +100,7 @@ document.addEventListener("DOMContentLoaded", function () {
           slideObserver.observe(slide);
         });
     } else {
+      // Fallback for older browsers
       document
         .querySelector(".section-one-slider")
         .addEventListener("scroll", checkSlideVisibility);
@@ -115,9 +109,10 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   }
 
+  // Initialize the slide observer
   initSlideObserver();
 
-  // Initial playback
+  // Initial playback for the first slide
   handleSlideChange(0);
 });
 
