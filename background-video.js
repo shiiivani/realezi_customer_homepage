@@ -1,120 +1,120 @@
-document.addEventListener("DOMContentLoaded", function () {
-  const video1 = document.getElementById("background-video");
-  const video2 = document.getElementById("background-video-2");
+// document.addEventListener("DOMContentLoaded", function () {
+//   const video1 = document.getElementById("background-video");
+//   const video2 = document.getElementById("background-video-2");
 
-  const videos = [
-    { src: "./videos/main~1.mp4", loop: false }, // Slide 1
-    { src: "./videos/main~2.mp4", loop: false }, // Slide 2
-    { src: "./videos/main~3.mp4", loop: false }, // Slide 3
-    { src: "./videos/main~4.mp4", loop: false }, // Slide 4
-    { src: "./videos/main~5.mp4", loop: false }, // Slide 5
-    { src: "./videos/main~6.mp4", loop: false }, // Slide 6
-    { src: "./videos/main~7.mp4", loop: false }, // Slide 7
-  ];
+//   const videos = [
+//     { src: "./videos/main~1.mp4", loop: false }, // Slide 1
+//     { src: "./videos/main~2.mp4", loop: false }, // Slide 2
+//     { src: "./videos/main~3.mp4", loop: false }, // Slide 3
+//     { src: "./videos/main~4.mp4", loop: false }, // Slide 4
+//     { src: "./videos/main~5.mp4", loop: false }, // Slide 5
+//     { src: "./videos/main~6.mp4", loop: false }, // Slide 6
+//     { src: "./videos/main~7.mp4", loop: false }, // Slide 7
+//   ];
 
-  let currentIndex = -1;
-  let activeVideo = video1;
-  let nextVideo = video2;
+//   let currentIndex = -1;
+//   let activeVideo = video1;
+//   let nextVideo = video2;
 
-  // Function to play video based on slide index
-  function playVideo(index) {
-    const videoData = videos[index];
+//   // Function to play video based on slide index
+//   function playVideo(index) {
+//     const videoData = videos[index];
 
-    // Swap the videos
-    const tempVideo = activeVideo;
-    activeVideo = nextVideo;
-    nextVideo = tempVideo;
+//     // Swap the videos
+//     const tempVideo = activeVideo;
+//     activeVideo = nextVideo;
+//     nextVideo = tempVideo;
 
-    // Set the next video source and properties
-    nextVideo.src = videoData.src;
-    nextVideo.loop = videoData.loop;
-    nextVideo.currentTime = 0; // Reset to the start
-    nextVideo.style.zIndex = "1"; // Bring the next video to the front
-    activeVideo.style.zIndex = "0"; // Send the active video to the back
+//     // Set the next video source and properties
+//     nextVideo.src = videoData.src;
+//     nextVideo.loop = videoData.loop;
+//     nextVideo.currentTime = 0; // Reset to the start
+//     nextVideo.style.zIndex = "1"; // Bring the next video to the front
+//     activeVideo.style.zIndex = "0"; // Send the active video to the back
 
-    // Play the next video
-    nextVideo.play();
+//     // Play the next video
+//     nextVideo.play();
 
-    // Handle the end event for non-looping videos
-    if (!videoData.loop) {
-      nextVideo.addEventListener("ended", onEnd);
-    } else {
-      nextVideo.removeEventListener("ended", onEnd);
-    }
+//     // Handle the end event for non-looping videos
+//     if (!videoData.loop) {
+//       nextVideo.addEventListener("ended", onEnd);
+//     } else {
+//       nextVideo.removeEventListener("ended", onEnd);
+//     }
 
-    // Pause the active video
-    activeVideo.pause();
-  }
+//     // Pause the active video
+//     activeVideo.pause();
+//   }
 
-  // Function to handle video end event
-  function onEnd() {
-    // Logic can be added here if needed when a video ends
-  }
+//   // Function to handle video end event
+//   function onEnd() {
+//     // Logic can be added here if needed when a video ends
+//   }
 
-  // Handle slide changes
-  function handleSlideChange(newIndex) {
-    if (newIndex !== currentIndex) {
-      currentIndex = newIndex;
-      playVideo(currentIndex);
-    }
-  }
+//   // Handle slide changes
+//   function handleSlideChange(newIndex) {
+//     if (newIndex !== currentIndex) {
+//       currentIndex = newIndex;
+//       playVideo(currentIndex);
+//     }
+//   }
 
-  // Check which slide is currently visible
-  function checkSlideVisibility() {
-    const sliderRect = document
-      .querySelector(".section-one-slider")
-      .getBoundingClientRect();
-    document
-      .querySelectorAll(".section-one-slider .slide")
-      .forEach((slide, index) => {
-        const h1 = slide.querySelector("h1");
-        const h1Rect = h1.getBoundingClientRect();
+//   // Check which slide is currently visible
+//   function checkSlideVisibility() {
+//     const sliderRect = document
+//       .querySelector(".section-one-slider")
+//       .getBoundingClientRect();
+//     document
+//       .querySelectorAll(".section-one-slider .slide")
+//       .forEach((slide, index) => {
+//         const h1 = slide.querySelector("h1");
+//         const h1Rect = h1.getBoundingClientRect();
 
-        // If the slide is visible in the viewport, trigger slide change
-        if (h1Rect.bottom > sliderRect.top && h1Rect.top < sliderRect.bottom) {
-          handleSlideChange(index);
-        }
-      });
-  }
+//         // If the slide is visible in the viewport, trigger slide change
+//         if (h1Rect.bottom > sliderRect.top && h1Rect.top < sliderRect.bottom) {
+//           handleSlideChange(index);
+//         }
+//       });
+//   }
 
-  // Initialize slide observer for visibility tracking
-  function initSlideObserver() {
-    if ("IntersectionObserver" in window) {
-      const slideObserver = new IntersectionObserver(
-        (entries) => {
-          entries.forEach((entry) => {
-            if (entry.isIntersecting) {
-              const index = Array.from(
-                document.querySelectorAll(".section-one-slider .slide")
-              ).indexOf(entry.target);
-              handleSlideChange(index); // Handle slide change when visible
-            }
-          });
-        },
-        { threshold: 0.5 } // Trigger when half the slide is visible
-      );
+//   // Initialize slide observer for visibility tracking
+//   function initSlideObserver() {
+//     if ("IntersectionObserver" in window) {
+//       const slideObserver = new IntersectionObserver(
+//         (entries) => {
+//           entries.forEach((entry) => {
+//             if (entry.isIntersecting) {
+//               const index = Array.from(
+//                 document.querySelectorAll(".section-one-slider .slide")
+//               ).indexOf(entry.target);
+//               handleSlideChange(index); // Handle slide change when visible
+//             }
+//           });
+//         },
+//         { threshold: 0.5 } // Trigger when half the slide is visible
+//       );
 
-      document
-        .querySelectorAll(".section-one-slider .slide")
-        .forEach((slide) => {
-          slideObserver.observe(slide);
-        });
-    } else {
-      // Fallback for older browsers
-      document
-        .querySelector(".section-one-slider")
-        .addEventListener("scroll", checkSlideVisibility);
-      window.addEventListener("resize", checkSlideVisibility);
-      window.addEventListener("scroll", checkSlideVisibility);
-    }
-  }
+//       document
+//         .querySelectorAll(".section-one-slider .slide")
+//         .forEach((slide) => {
+//           slideObserver.observe(slide);
+//         });
+//     } else {
+//       // Fallback for older browsers
+//       document
+//         .querySelector(".section-one-slider")
+//         .addEventListener("scroll", checkSlideVisibility);
+//       window.addEventListener("resize", checkSlideVisibility);
+//       window.addEventListener("scroll", checkSlideVisibility);
+//     }
+//   }
 
-  // Initialize the slide observer
-  initSlideObserver();
+//   // Initialize the slide observer
+//   initSlideObserver();
 
-  // Initial playback for the first slide
-  handleSlideChange(0);
-});
+//   // Initial playback for the first slide
+//   handleSlideChange(0);
+// });
 
 // document.addEventListener("DOMContentLoaded", function () {
 //   const video1 = document.getElementById("background-video");
@@ -245,3 +245,124 @@ document.addEventListener("DOMContentLoaded", function () {
 //   initSlideObserver();
 //   handleSlideChange(0);
 // });
+
+// Include GSAP library in your project first
+document.addEventListener("DOMContentLoaded", function () {
+  const video = document.getElementById("background-video");
+  const slides = document.querySelectorAll(".section-one-slider .slide");
+  let currentIndex = -1;
+  let isPlaying = false;
+
+  function playVideoSegment(startTime, endTime) {
+    isPlaying = true;
+    video.currentTime = startTime;
+    video.play();
+
+    const pauseVideoAtEndTime = function () {
+      if (video.currentTime >= endTime) {
+        video.pause();
+        video.removeEventListener("timeupdate", pauseVideoAtEndTime);
+        isPlaying = false;
+      }
+    };
+
+    video.addEventListener("timeupdate", pauseVideoAtEndTime);
+  }
+
+  function handleSlideChange(newIndex) {
+    if (newIndex !== currentIndex && !isPlaying) {
+      currentIndex = newIndex;
+      const currentSlide = slides[currentIndex];
+      const startTime = parseFloat(currentSlide.getAttribute("data-start"));
+      const endTime = parseFloat(currentSlide.getAttribute("data-end"));
+
+      playVideoSegment(startTime, endTime);
+    }
+  }
+
+  function checkSlideVisibility() {
+    const sliderRect = document
+      .querySelector(".section-one-slider")
+      .getBoundingClientRect();
+    slides.forEach((slide, index) => {
+      const h1 = slide.querySelector("h1");
+      const h1Rect = h1.getBoundingClientRect();
+
+      if (h1Rect.bottom > sliderRect.top && h1Rect.top < sliderRect.bottom) {
+        handleSlideChange(index);
+      }
+    });
+  }
+
+  // Add event listeners to capture the slide changes
+  document
+    .querySelector(".section-one-slider")
+    .addEventListener("scroll", () => {
+      gsap.to(window, { duration: 0.5, onComplete: checkSlideVisibility });
+    });
+
+  // Optionally call checkSlideVisibility on load to set the initial state
+  checkSlideVisibility();
+});
+
+// Intersection Observer to detect visible slides
+function initSlideObserver() {
+  if ("IntersectionObserver" in window) {
+    const slideObserver = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            const index = Array.from(slides).indexOf(entry.target);
+            handleSlideChange(index);
+          }
+        });
+      },
+      { threshold: 0.2 } // Trigger when half the slide is visible
+    );
+
+    slides.forEach((slide) => {
+      slideObserver.observe(slide);
+    });
+  } else {
+    document
+      .querySelector(".section-one-slider")
+      .addEventListener("scroll", checkSlideVisibility);
+    window.addEventListener("resize", checkSlideVisibility);
+    window.addEventListener("scroll", checkSlideVisibility);
+  }
+}
+
+// Initialize the slide observer
+initSlideObserver();
+
+// Initial playback for the first slide
+handleSlideChange(0);
+
+// Simple throttle function
+function throttle(func, limit) {
+  let lastFunc;
+  let lastRan;
+  return function () {
+    const context = this;
+    const args = arguments;
+    if (!lastRan) {
+      func.apply(context, args);
+      lastRan = Date.now();
+    } else {
+      clearTimeout(lastFunc);
+      lastFunc = setTimeout(function () {
+        if (Date.now() - lastRan >= limit) {
+          func.apply(context, args);
+          lastRan = Date.now();
+        }
+      }, limit - (Date.now() - lastRan));
+    }
+  };
+}
+
+// Use throttle on the visibility check
+const throttledCheckSlideVisibility = throttle(checkSlideVisibility, 100);
+
+document
+  .querySelector(".section-one-slider")
+  .addEventListener("scroll", throttledCheckSlideVisibility);
