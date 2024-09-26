@@ -136,10 +136,10 @@ document.addEventListener("DOMContentLoaded", function () {
       arrowIcon.classList.remove("rotate");
     }
   });
-  const minSlider = document.getElementById("minSlider");
-  const maxSlider = document.getElementById("maxSlider");
-  const minValueDisplay = document.getElementById("minValue");
-  const maxValueDisplay = document.getElementById("maxValue");
+  const minSlider = document.getElementById("minSlider1");
+  const maxSlider = document.getElementById("maxSlider1");
+  const minValueDisplay = document.getElementById("minValue1");
+  const maxValueDisplay = document.getElementById("maxValue1");
 
   function convertToAmount(value) {
     if (value <= 100) {

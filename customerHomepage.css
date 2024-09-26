@@ -1273,6 +1273,7 @@ input[type="range"]::-webkit-slider-thumb {
   align-items: center;
   justify-content: center;
   font-size: 0.9rem;
+  margin-left: 15px;
 }
 .slider-labels .line {
   height: 17px;
