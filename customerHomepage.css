@@ -514,6 +514,13 @@ body::-webkit-scrollbar {
   white-space: nowrap;
 }
 
+.section-one-bottom button:hover {
+  background-position: right center;
+  background-size: 200% auto;
+  -webkit-animation: pulse 2s infinite;
+  animation: pulse51 1.5s infinite;
+}
+
 /* Filter Section Modal */
 .filter-section-modal {
   position: fixed;
