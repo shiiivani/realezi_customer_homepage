@@ -1,226 +1,47 @@
-// Property Type Animations
-// Store references to Rive instances
-// const riveAnimations = {};
+const riveAnimations = {};
 
-// // Initialize Rive animations
-// function initializeRiveAnimations(selector, src, stateMachines) {
-//   const elements = document.querySelectorAll(selector);
-
-//   elements.forEach((canvas, index) => {
-//     const key = `${selector.replace(".", "")}_${index}`;
-//     riveAnimations[key] = new rive.Rive({
-//       src: src,
-//       canvas: canvas,
-//       autoplay: true,
-//       stateMachines: stateMachines,
-//       onLoad: () => {
-//         riveAnimations[key].resizeDrawingSurfaceToCanvas();
-//       },
-//       onError: (error) => {
-//         console.error("Rive animation error:", error);
-//       },
-//     });
-//   });
-// }
-
-// function checkScreenSizeAndInitialize() {
-//   if (window.innerWidth <= 860) {
-//     initializeRiveAnimations(
-//       ".residential",
-//       "./riv/building.riv",
-//       "State Machine 1"
-//     );
-//     initializeRiveAnimations(
-//       ".commercial",
-//       "./riv/commercial.riv",
-//       "State Machine 1"
-//     );
-//     initializeRiveAnimations(".plot", "./riv/plot.riv", "State Machine 1");
-//     initializeRiveAnimations(".pg", "./riv/pg.riv", "State Machine 1");
-//     initializeRiveAnimations(
-//       ".coworkingspace",
-//       "./riv/coworkingspace.riv",
-//       "State Machine 1"
-//     );
-//   }
-// }
-
-// // Initialize animations for different types
-// initializeRiveAnimations(
-//   ".residential",
-//   "./riv/building.riv",
-//   "State Machine 1"
-// );
-// initializeRiveAnimations(
-//   ".commercial",
-//   "./riv/commercial.riv",
-//   "State Machine 1"
-// );
-// initializeRiveAnimations(".plot", "./riv/plot.riv", "State Machine 1");
-// initializeRiveAnimations(".pg", "./riv/pg.riv", "State Machine 1");
-// initializeRiveAnimations(
-//   ".coworkingspace",
-//   "./riv/coworkingspace.riv",
-//   "State Machine 1"
-// );
-
-// // Handle click events
-// function handleClick(clickedKey) {
-//   // Loop through and reset all instances to initial state machine
-//   for (const key in riveAnimations) {
-//     if (riveAnimations.hasOwnProperty(key)) {
-//       if (key !== clickedKey) {
-//         riveAnimations[key].cleanup();
-//         riveAnimations[key] = new rive.Rive({
-//           src: riveAnimations[key].src,
-//           canvas: riveAnimations[key].canvas,
-//           autoplay: true,
-//           stateMachines: "State Machine 1",
-//         });
-//       }
-//     }
-//   }
-
-//   // Update the clicked instance to use "Timeline 1"
-//   riveAnimations[clickedKey].cleanup();
-//   riveAnimations[clickedKey] = new rive.Rive({
-//     src: riveAnimations[clickedKey].src,
-//     canvas: riveAnimations[clickedKey].canvas,
-//     autoplay: true,
-//     stateMachines: "Timeline 1",
-//   });
-// }
-
-// // Add event listeners
-// function addEventListeners(selector) {
-//   const elements = document.querySelectorAll(selector);
-
-//   elements.forEach((element, index) => {
-//     const key = `${selector.replace(".", "")}_${index}`;
-
-//     element.addEventListener("click", function () {
-//       handleClick(key);
-//     });
-
-//     element.addEventListener("touchstart", function (event) {
-//       event.preventDefault();
-//       handleClick(key);
-//     });
-//   });
-// }
-
-// addEventListeners(".residential");
-// addEventListeners(".commercial");
-// addEventListeners(".plot");
-// addEventListeners(".pg");
-// addEventListeners(".coworkingspace");
-
-// Initialize rive animations when clicking on rent button
-// function updateAllRiveInstances(selector, src, stateMachine) {
-//   const elements = document.querySelectorAll(selector);
-
-//   elements.forEach((canvas, index) => {
-//     const key = `${selector.replace(".", "")}_${index}`;
-
-//     if (riveAnimations[key]) {
-//       riveAnimations[key].cleanup();
-//     }
-
-//     riveAnimations[key] = new rive.Rive({
-//       src: src,
-//       canvas: canvas,
-//       autoplay: true,
-//       stateMachines: stateMachine,
-//       onLoad: () => {
-//         riveAnimations[key].resizeDrawingSurfaceToCanvas();
-//       },
-//       onError: (error) => {
-//         console.error("Rive animation error:", error);
-//       },
-//     });
-//   });
-// }
-
-// // Add event listener to the "rent-btn"
-// document.getElementById("rent-btn").addEventListener("click", () => {
-//   updateAllRiveInstances(".pg", "./riv/pg.riv", "State Machine 1");
-//   updateAllRiveInstances(
-//     ".coworkingspace",
-//     "./riv/coworkingspace.riv",
-//     "State Machine 1"
-//   );
-// });
-
-const riveAnimations = {
-  residential: new rive.Rive({
-    src: "./riv/building.riv",
-    canvas: document.getElementById("residential"),
+// Function to initialize Rive animation
+function loadRiveAnimation(
+  key,
+  src,
+  canvasId,
+  stateMachine = "State Machine 1"
+) {
+  return new rive.Rive({
+    src: src,
+    canvas: document.getElementById(canvasId),
     autoplay: true,
-    stateMachines: "State Machine 1",
+    stateMachines: stateMachine,
     onLoad: () => {
-      riveAnimations.residential.resizeDrawingSurfaceToCanvas();
+      riveAnimations[key].resizeDrawingSurfaceToCanvas();
     },
-  }),
-  commercial: new rive.Rive({
-    src: "./riv/commercial.riv",
-    canvas: document.getElementById("commercial"),
-    autoplay: true,
-    stateMachines: "State Machine 1",
-    onLoad: () => {
-      riveAnimations.commercial.resizeDrawingSurfaceToCanvas();
-    },
-  }),
-  plot: new rive.Rive({
-    src: "./riv/plot.riv",
-    canvas: document.getElementById("plot"),
-    autoplay: true,
-    stateMachines: "State Machine 1",
-    onLoad: () => {
-      riveAnimations.plot.resizeDrawingSurfaceToCanvas();
-    },
-  }),
-  pg: new rive.Rive({
-    src: "./riv/pg.riv",
-    canvas: document.getElementById("pg"),
-    autoplay: true,
-    stateMachines: "State Machine 1",
-    onLoad: () => {
-      riveAnimations.pg.resizeDrawingSurfaceToCanvas();
-    },
-  }),
-  coworkingspace: new rive.Rive({
-    src: "./riv/coworkingspace.riv",
-    canvas: document.getElementById("coworkingspace"),
-    autoplay: true,
-    stateMachines: "State Machine 1",
-    onLoad: () => {
-      riveAnimations.coworkingspace.resizeDrawingSurfaceToCanvas();
-    },
-  }),
-};
+  });
+}
 
+// Function to clean up and reload animations on click
 function handleClick(clickedKey) {
   for (const key in riveAnimations) {
     if (riveAnimations.hasOwnProperty(key)) {
       riveAnimations[key].cleanup();
-      riveAnimations[key] = new rive.Rive({
-        src: riveAnimations[key].src,
-        canvas: riveAnimations[key].canvas,
-        autoplay: true,
-        stateMachines: "State Machine 1",
-      });
+      riveAnimations[key] = loadRiveAnimation(
+        key,
+        riveConfigs[key].src,
+        riveConfigs[key].id,
+        "State Machine 1"
+      );
     }
   }
 
   riveAnimations[clickedKey].cleanup();
-  riveAnimations[clickedKey] = new rive.Rive({
-    src: riveAnimations[clickedKey].src,
-    canvas: riveAnimations[clickedKey].canvas,
-    autoplay: true,
-    stateMachines: "Timeline 1",
-  });
+  riveAnimations[clickedKey] = loadRiveAnimation(
+    clickedKey,
+    riveConfigs[clickedKey].src,
+    riveConfigs[clickedKey].id,
+    "Timeline 1"
+  );
 }
 
+// Add event listeners to each element for click and touchstart
 function addEventListeners(elementId) {
   const element = document.getElementById(elementId);
 
@@ -234,11 +55,54 @@ function addEventListeners(elementId) {
   });
 }
 
-addEventListeners("residential");
-addEventListeners("commercial");
-addEventListeners("plot");
-addEventListeners("pg");
-addEventListeners("coworkingspace");
+// List of canvas elements and corresponding Rive animation files
+const riveConfigs = {
+  residential: { id: "residential", src: "./riv/building.riv" },
+  commercial: { id: "commercial", src: "./riv/commercial.riv" },
+  plot: { id: "plot", src: "./riv/plot.riv" },
+  pg: { id: "pg", src: "./riv/pg.riv" },
+  coworkingspace: { id: "coworkingspace", src: "./riv/coworkingspace.riv" },
+};
+
+// Create an Intersection Observer to defer loading of animations
+const observer = new IntersectionObserver(
+  (entries, observer) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        const canvasId = entry.target.id;
+        const config = riveConfigs[canvasId];
+
+        if (config && !riveAnimations[canvasId]) {
+          // Load the Rive animation when the element becomes visible
+          riveAnimations[canvasId] = loadRiveAnimation(
+            canvasId,
+            config.src,
+            config.id
+          );
+
+          // Add event listeners to handle click events
+          addEventListeners(canvasId);
+
+          // Stop observing once the animation has been loaded
+          observer.unobserve(entry.target);
+        }
+      }
+    });
+  },
+  {
+    root: null, // Viewport is the root
+    rootMargin: "0px",
+    threshold: 0.1, // Trigger when 10% of the element is visible
+  }
+);
+
+// Observe each canvas element
+Object.values(riveConfigs).forEach((config) => {
+  const canvasElement = document.getElementById(config.id);
+  if (canvasElement) {
+    observer.observe(canvasElement);
+  }
+});
 
 document.getElementById("rent-btn").addEventListener("click", () => {
   riveAnimations.pg.cleanup();
