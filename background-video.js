@@ -366,7 +366,6 @@
 // document
 //   .querySelector(".section-one-slider")
 //   .addEventListener("scroll", throttledCheckSlideVisibility);
-
 document.addEventListener("DOMContentLoaded", function () {
   const slides = document.querySelectorAll(".section-one-slider .slide");
   let currentIndex = -1;
@@ -374,25 +373,35 @@ document.addEventListener("DOMContentLoaded", function () {
   let player;
 
   // Load the YouTube IFrame API and create the player
-  function onYouTubeIframeAPIReady() {
-    if (typeof YT !== "undefined" && YT.Player) {
-      console.log("YouTube Player is accessible");
-      player = new YT.Player("background-video", {
-        events: {
-          onReady: onPlayerReady,
-          onStateChange: onPlayerStateChange,
-        },
-      });
-    }
-  }
+  onYouTubeIframeAPIReady = function () {
+    console.log("YouTube IFrame API is ready");
+    player = new YT.Player("background-video", {
+      events: {
+        onReady: onPlayerReady,
+        onStateChange: onPlayerStateChange,
+      },
+    });
+  };
 
   // When the player is ready
   function onPlayerReady(event) {
     console.log("Player is ready!");
+    playInitialSegment(); // Play video for 2 seconds on load
     checkSlideVisibility(); // Check visibility on page load
   }
 
-  // Handle video state changes (like pause after segment ends)
+  // Play video for 2 seconds at the start
+  function playInitialSegment() {
+    if (player) {
+      player.playVideo();
+      setTimeout(() => {
+        player.pauseVideo();
+        isPlaying = false; // Reset the playing state
+      }, 2000); // Play for 2 seconds
+    }
+  }
+
+  // Handle video state changes
   function onPlayerStateChange(event) {
     if (event.data === YT.PlayerState.PLAYING) {
       isPlaying = true;
@@ -503,7 +512,5 @@ document.addEventListener("DOMContentLoaded", function () {
 
   // Initialize the observer
   initSlideObserver();
-
-  // Expose the YouTube API to the window so it can be called
   onYouTubeIframeAPIReady();
 });
