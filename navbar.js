@@ -99,4 +99,13 @@ document.addEventListener("DOMContentLoaded", () => {
       dropdown.classList.toggle("active");
     });
   });
+  document.addEventListener("click", (e) => {
+    if (
+      !resourceContainerItem.contains(e.target) &&
+      !resourceMainDropdown.contains(e.target)
+    ) {
+      resourceMainDropdown.classList.remove("active");
+      sideDropdowns.forEach((dropdown) => dropdown.classList.remove("active"));
+    }
+  });
 });
