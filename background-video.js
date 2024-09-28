@@ -245,7 +245,6 @@
 //   initSlideObserver();
 //   handleSlideChange(0);
 // });
-
 // Include GSAP library in your project first
 document.addEventListener("DOMContentLoaded", function () {
   const video = document.getElementById("background-video");
@@ -253,6 +252,7 @@ document.addEventListener("DOMContentLoaded", function () {
   let currentIndex = -1;
   let isPlaying = false;
 
+  // Function to play video segments based on slide
   function playVideoSegment(startTime, endTime) {
     isPlaying = true;
     video.currentTime = startTime;
@@ -269,6 +269,7 @@ document.addEventListener("DOMContentLoaded", function () {
     video.addEventListener("timeupdate", pauseVideoAtEndTime);
   }
 
+  // Function to handle slide changes
   function handleSlideChange(newIndex) {
     if (newIndex !== currentIndex && !isPlaying) {
       currentIndex = newIndex;
@@ -280,6 +281,53 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   }
 
+  // Intersection Observer to detect visible slides
+  function initSlideObserver() {
+    if ("IntersectionObserver" in window) {
+      const slideObserver = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              const index = Array.from(slides).indexOf(entry.target);
+              handleSlideChange(index);
+            }
+          });
+        },
+        { threshold: 0.2 } // Trigger when 20% of the slide is visible
+      );
+
+      slides.forEach((slide) => {
+        slideObserver.observe(slide);
+      });
+    }
+  }
+
+  // Initialize the slide observer
+  initSlideObserver();
+
+  // Throttle function for performance optimization
+  function throttle(func, limit) {
+    let lastFunc;
+    let lastRan;
+    return function () {
+      const context = this;
+      const args = arguments;
+      if (!lastRan) {
+        func.apply(context, args);
+        lastRan = Date.now();
+      } else {
+        clearTimeout(lastFunc);
+        lastFunc = setTimeout(function () {
+          if (Date.now() - lastRan >= limit) {
+            func.apply(context, args);
+            lastRan = Date.now();
+          }
+        }, limit - (Date.now() - lastRan));
+      }
+    };
+  }
+
+  // Fallback scroll-based visibility detection if IntersectionObserver is not supported
   function checkSlideVisibility() {
     const sliderRect = document
       .querySelector(".section-one-slider")
@@ -294,75 +342,13 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   }
 
-  // Add event listeners to capture the slide changes
+  const throttledCheckSlideVisibility = throttle(checkSlideVisibility, 100);
+
+  // Add scroll event listener as a fallback
   document
     .querySelector(".section-one-slider")
-    .addEventListener("scroll", () => {
-      gsap.to(window, { duration: 0.5, onComplete: checkSlideVisibility });
-    });
-
-  // Optionally call checkSlideVisibility on load to set the initial state
-  checkSlideVisibility();
+    .addEventListener("scroll", throttledCheckSlideVisibility);
 });
-
-// Intersection Observer to detect visible slides
-function initSlideObserver() {
-  if ("IntersectionObserver" in window) {
-    const slideObserver = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            const index = Array.from(slides).indexOf(entry.target);
-            handleSlideChange(index);
-          }
-        });
-      },
-      { threshold: 0.2 } // Trigger when half the slide is visible
-    );
-
-    slides.forEach((slide) => {
-      slideObserver.observe(slide);
-    });
-  } else {
-    document
-      .querySelector(".section-one-slider")
-      .addEventListener("scroll", checkSlideVisibility);
-    window.addEventListener("resize", checkSlideVisibility);
-    window.addEventListener("scroll", checkSlideVisibility);
-  }
-}
-
-// Initialize the slide observer
-initSlideObserver();
 
 // Initial playback for the first slide
 handleSlideChange(0);
-
-// Simple throttle function
-function throttle(func, limit) {
-  let lastFunc;
-  let lastRan;
-  return function () {
-    const context = this;
-    const args = arguments;
-    if (!lastRan) {
-      func.apply(context, args);
-      lastRan = Date.now();
-    } else {
-      clearTimeout(lastFunc);
-      lastFunc = setTimeout(function () {
-        if (Date.now() - lastRan >= limit) {
-          func.apply(context, args);
-          lastRan = Date.now();
-        }
-      }, limit - (Date.now() - lastRan));
-    }
-  };
-}
-
-// Use throttle on the visibility check
-const throttledCheckSlideVisibility = throttle(checkSlideVisibility, 100);
-
-document
-  .querySelector(".section-one-slider")
-  .addEventListener("scroll", throttledCheckSlideVisibility);

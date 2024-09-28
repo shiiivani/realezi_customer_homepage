@@ -263,7 +263,6 @@ document.querySelectorAll(".properties-categories canvas").forEach((canvas) => {
 
 function handleCanvasClick(canvas) {
   const selectedCanvasId = canvas.id;
-  console.log(selectedCanvasId);
   if (propertyOptions[selectedCanvasId]) {
     document.getElementById("dropdown-button").disabled = false;
     populateDropdownOptions(propertyOptions[selectedCanvasId]);
