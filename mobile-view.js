@@ -151,7 +151,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 // Section one typewriter
 document.addEventListener("DOMContentLoaded", function () {
-  const typewriterText = document.getElementById("typewriter-text");
+  const typewriterElements = document.querySelectorAll("#typewriter-text");
   const sentences = [
     "Real Estate Made Easy",
     "Click-Connect-Close",
@@ -162,37 +162,51 @@ document.addEventListener("DOMContentLoaded", function () {
     "Add On Services Made Easy",
   ];
 
-  let sentenceIndex = 0;
-  let letterIndex = 0;
-  let currentSentence = "";
-  let deleting = false;
+  // Create an array to track state for each typewriter
+  const typewriters = Array.from(typewriterElements).map(() => ({
+    sentenceIndex: 0,
+    letterIndex: 0,
+    currentSentence: sentences[0],
+    deleting: false,
+  }));
 
-  function typeWriter() {
-    if (deleting) {
-      if (letterIndex > 0) {
-        letterIndex--;
-        typewriterText.textContent = currentSentence.substring(0, letterIndex);
+  function typeWriter(index) {
+    const element = typewriterElements[index];
+    const state = typewriters[index];
+
+    if (state.deleting) {
+      if (state.letterIndex > 0) {
+        state.letterIndex--;
+        element.textContent = state.currentSentence.substring(
+          0,
+          state.letterIndex
+        );
       } else {
-        deleting = false;
-        sentenceIndex = (sentenceIndex + 1) % sentences.length; // Move to next sentence
-        currentSentence = sentences[sentenceIndex];
-        setTimeout(typeWriter, 500); // Pause before starting to type new sentence
+        state.deleting = false;
+        state.sentenceIndex = (state.sentenceIndex + 1) % sentences.length;
+        state.currentSentence = sentences[state.sentenceIndex];
+        setTimeout(() => typeWriter(index), 500);
         return;
       }
     } else {
-      if (letterIndex < sentences[sentenceIndex].length) {
-        letterIndex++;
-        typewriterText.textContent = currentSentence.substring(0, letterIndex);
+      if (state.letterIndex < state.currentSentence.length) {
+        state.letterIndex++;
+        element.textContent = state.currentSentence.substring(
+          0,
+          state.letterIndex
+        );
       } else {
-        deleting = true;
-        setTimeout(typeWriter, 2000); // Pause before deleting the sentence
+        state.deleting = true;
+        setTimeout(() => typeWriter(index), 2000);
         return;
       }
     }
 
-    setTimeout(typeWriter, deleting ? 50 : 100); // Speed of typing and deleting
+    setTimeout(() => typeWriter(index), state.deleting ? 50 : 100);
   }
 
-  currentSentence = sentences[sentenceIndex];
-  typeWriter();
+  // Start typewriter effect for each element
+  typewriterElements.forEach((_, index) => {
+    typeWriter(index);
+  });
 });

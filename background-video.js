@@ -1,259 +1,406 @@
+// // // Include GSAP library in your project first
 // document.addEventListener("DOMContentLoaded", function () {
-//   const video1 = document.getElementById("background-video");
-//   const video2 = document.getElementById("background-video-2");
-
-//   const videos = [
-//     { src: "./videos/main~1.mp4", loop: false }, // Slide 1
-//     { src: "./videos/main~2.mp4", loop: false }, // Slide 2
-//     { src: "./videos/main~3.mp4", loop: false }, // Slide 3
-//     { src: "./videos/main~4.mp4", loop: false }, // Slide 4
-//     { src: "./videos/main~5.mp4", loop: false }, // Slide 5
-//     { src: "./videos/main~6.mp4", loop: false }, // Slide 6
-//     { src: "./videos/main~7.mp4", loop: false }, // Slide 7
-//   ];
-
+//   const video = document.getElementById("background-video");
+//   const slides = document.querySelectorAll(".section-one-slider .slide");
 //   let currentIndex = -1;
-//   let activeVideo = video1;
-//   let nextVideo = video2;
+//   let isPlaying = false;
 
-//   // Function to play video based on slide index
-//   function playVideo(index) {
-//     const videoData = videos[index];
+//   // Function to play video segments based on slide
+//   function playVideoSegment(startTime, endTime) {
+//     isPlaying = true;
+//     video.currentTime = startTime;
+//     video.play();
 
-//     // Swap the videos
-//     const tempVideo = activeVideo;
-//     activeVideo = nextVideo;
-//     nextVideo = tempVideo;
+//     const pauseVideoAtEndTime = function () {
+//       if (video.currentTime >= endTime) {
+//         video.pause();
+//         video.removeEventListener("timeupdate", pauseVideoAtEndTime);
+//         isPlaying = false;
+//       }
+//     };
 
-//     // Set the next video source and properties
-//     nextVideo.src = videoData.src;
-//     nextVideo.loop = videoData.loop;
-//     nextVideo.currentTime = 0; // Reset to the start
-//     nextVideo.style.zIndex = "1"; // Bring the next video to the front
-//     activeVideo.style.zIndex = "0"; // Send the active video to the back
-
-//     // Play the next video
-//     nextVideo.play();
-
-//     // Handle the end event for non-looping videos
-//     if (!videoData.loop) {
-//       nextVideo.addEventListener("ended", onEnd);
-//     } else {
-//       nextVideo.removeEventListener("ended", onEnd);
-//     }
-
-//     // Pause the active video
-//     activeVideo.pause();
+//     video.addEventListener("timeupdate", pauseVideoAtEndTime);
 //   }
 
-//   // Function to handle video end event
-//   function onEnd() {
-//     // Logic can be added here if needed when a video ends
-//   }
-
-//   // Handle slide changes
+//   // Function to handle slide changes
 //   function handleSlideChange(newIndex) {
-//     if (newIndex !== currentIndex) {
+//     if (newIndex !== currentIndex && !isPlaying) {
 //       currentIndex = newIndex;
-//       playVideo(currentIndex);
+//       const currentSlide = slides[currentIndex];
+//       const startTime = parseFloat(currentSlide.getAttribute("data-start"));
+//       const endTime = parseFloat(currentSlide.getAttribute("data-end"));
+
+//       playVideoSegment(startTime, endTime);
 //     }
 //   }
 
-//   // Check which slide is currently visible
-//   function checkSlideVisibility() {
-//     const sliderRect = document
-//       .querySelector(".section-one-slider")
-//       .getBoundingClientRect();
-//     document
-//       .querySelectorAll(".section-one-slider .slide")
-//       .forEach((slide, index) => {
-//         const h1 = slide.querySelector("h1");
-//         const h1Rect = h1.getBoundingClientRect();
-
-//         // If the slide is visible in the viewport, trigger slide change
-//         if (h1Rect.bottom > sliderRect.top && h1Rect.top < sliderRect.bottom) {
-//           handleSlideChange(index);
-//         }
-//       });
-//   }
-
-//   // Initialize slide observer for visibility tracking
+//   // Intersection Observer to detect visible slides
 //   function initSlideObserver() {
 //     if ("IntersectionObserver" in window) {
 //       const slideObserver = new IntersectionObserver(
 //         (entries) => {
 //           entries.forEach((entry) => {
 //             if (entry.isIntersecting) {
-//               const index = Array.from(
-//                 document.querySelectorAll(".section-one-slider .slide")
-//               ).indexOf(entry.target);
-//               handleSlideChange(index); // Handle slide change when visible
+//               const index = Array.from(slides).indexOf(entry.target);
+//               handleSlideChange(index);
 //             }
 //           });
 //         },
-//         { threshold: 0.5 } // Trigger when half the slide is visible
+//         { threshold: 0.2 } // Trigger when 20% of the slide is visible
 //       );
 
-//       document
-//         .querySelectorAll(".section-one-slider .slide")
-//         .forEach((slide) => {
-//           slideObserver.observe(slide);
-//         });
-//     } else {
-//       // Fallback for older browsers
-//       document
-//         .querySelector(".section-one-slider")
-//         .addEventListener("scroll", checkSlideVisibility);
-//       window.addEventListener("resize", checkSlideVisibility);
-//       window.addEventListener("scroll", checkSlideVisibility);
+//       slides.forEach((slide) => {
+//         slideObserver.observe(slide);
+//       });
 //     }
 //   }
 
 //   // Initialize the slide observer
 //   initSlideObserver();
 
-//   // Initial playback for the first slide
-//   handleSlideChange(0);
-// });
-
-// document.addEventListener("DOMContentLoaded", function () {
-//   const video1 = document.getElementById("background-video");
-//   const video2 = document.getElementById("background-video-2");
-
-//   const videos = [
-//     { src: "./videos/business-intro.mov", loop: false }, // Slide 1
-//     { src: "./videos/main(1).mp4", loop: true }, // Slide 2
-//     { src: "./videos/main~2.mp4", loop: false }, // Slide 3 - Video 1
-//     { src: "./videos/main~2(2).mp4", loop: true }, // Slide 3 - Video 2 (loop)
-//     { src: "./videos/main~3.mp4", loop: false }, // Slide 4 - Video 1
-//     { src: "./videos/main~3(3).mp4", loop: true }, // Slide 4 - Video 2 (loop)
-//     { src: "./videos/main~8.mp4", loop: false }, // Slide 5
-//   ];
-
-//   let currentIndex = -1;
-//   let activeVideo = video1;
-//   let nextVideo = video2;
-
-//   // Function to play video with GSAP transition
-//   function playVideo(index) {
-//     const videoData = videos[index];
-
-//     // Swap videos
-//     [activeVideo, nextVideo] = [nextVideo, activeVideo];
-
-//     // Set source and loop properties
-//     nextVideo.src = videoData.src;
-//     nextVideo.loop = videoData.loop;
-//     nextVideo.currentTime = 0;
-
-//     // GSAP transition
-//     gsap.set(nextVideo, { autoAlpha: 0, zIndex: 1 });
-//     gsap.set(activeVideo, { zIndex: 0 });
-//     gsap.to(nextVideo, { autoAlpha: 1, duration: 0.5 });
-
-//     // Play the next video
-//     nextVideo.play();
-
-//     // Handle non-looping videos with 'ended' event
-//     if (!videoData.loop) {
-//       nextVideo.onended = () => {
-//         if (currentIndex === 2) {
-//           playVideo(3); // Loop after main~2.mp4 ends
-//         } else if (currentIndex === 3) {
-//           playVideo(4); // Loop after main~3.mp4 ends
-//         } else if (currentIndex === 6) {
-//           // Stop playback, no more transitions
-//           gsap.set(nextVideo, { zIndex: 1 });
-//           nextVideo.onended = null;
-//         }
-//       };
-//     } else {
-//       nextVideo.onended = null; // Remove 'ended' event listener for looping videos
-//     }
-
-//     // Pause the currently active video
-//     activeVideo.pause();
-//   }
-
-//   // Function to handle slide change
-//   function handleSlideChange(newIndex) {
-//     if (newIndex !== currentIndex) {
-//       currentIndex = newIndex;
-//       if (newIndex === 1) {
-//         playVideo(1);
-//       } else if (newIndex === 2) {
-//         playVideo(2);
-//       } else if (newIndex === 3) {
-//         playVideo(4);
-//       } else if (newIndex === 4) {
-//         playVideo(6);
+//   // Throttle function for performance optimization
+//   function throttle(func, limit) {
+//     let lastFunc;
+//     let lastRan;
+//     return function () {
+//       const context = this;
+//       const args = arguments;
+//       if (!lastRan) {
+//         func.apply(context, args);
+//         lastRan = Date.now();
+//       } else {
+//         clearTimeout(lastFunc);
+//         lastFunc = setTimeout(function () {
+//           if (Date.now() - lastRan >= limit) {
+//             func.apply(context, args);
+//             lastRan = Date.now();
+//           }
+//         }, limit - (Date.now() - lastRan));
 //       }
-//     }
+//     };
 //   }
 
-//   // Initialize Intersection Observer to track slide visibility
-//   function initSlideObserver() {
-//     if ("IntersectionObserver" in window) {
-//       const slideObserver = new IntersectionObserver(
-//         (entries) => {
-//           entries.forEach((entry) => {
-//             if (entry.isIntersecting) {
-//               const index = Array.from(
-//                 document.querySelectorAll(".section-one-slider .slide")
-//               ).indexOf(entry.target);
-//               handleSlideChange(index);
-//             }
-//           });
-//         },
-//         { threshold: 0.5 } // Trigger when 50% of the slide is visible
-//       );
-
-//       document
-//         .querySelectorAll(".section-one-slider .slide")
-//         .forEach((slide) => {
-//           slideObserver.observe(slide);
-//         });
-//     } else {
-//       // Fallback to scroll event if IntersectionObserver is not supported
-//       document
-//         .querySelector(".section-one-slider")
-//         .addEventListener("scroll", checkSlideVisibility);
-//       window.addEventListener("resize", checkSlideVisibility);
-//       window.addEventListener("scroll", checkSlideVisibility);
-//     }
-//   }
-
-//   // Function to check slide visibility (fallback)
+//   // Fallback scroll-based visibility detection if IntersectionObserver is not supported
 //   function checkSlideVisibility() {
 //     const sliderRect = document
 //       .querySelector(".section-one-slider")
 //       .getBoundingClientRect();
-//     document
-//       .querySelectorAll(".section-one-slider .slide")
-//       .forEach((slide, index) => {
-//         const h1 = slide.querySelector("h1");
-//         const h1Rect = h1.getBoundingClientRect();
+//     slides.forEach((slide, index) => {
+//       const h1 = slide.querySelector("h1");
+//       const h1Rect = h1.getBoundingClientRect();
 
-//         // Check if the h1 is within the slider's viewport
-//         if (h1Rect.bottom > sliderRect.top && h1Rect.top < sliderRect.bottom) {
-//           handleSlideChange(index);
-//         }
-//       });
+//       if (h1Rect.bottom > sliderRect.top && h1Rect.top < sliderRect.bottom) {
+//         handleSlideChange(index);
+//       }
+//     });
 //   }
 
-//   // Initialize everything
-//   initSlideObserver();
-//   handleSlideChange(0);
+//   const throttledCheckSlideVisibility = throttle(checkSlideVisibility, 100);
+
+//   // Add scroll event listener as a fallback
+//   document
+//     .querySelector(".section-one-slider")
+//     .addEventListener("scroll", throttledCheckSlideVisibility);
 // });
-// Include GSAP library in your project first
+
+// // Initial playback for the first slide
+// handleSlideChange(0);
+
+////////////////////////
+
+// document.addEventListener("DOMContentLoaded", function () {
+//   const video = document.getElementById("background-video");
+//   const slides = document.querySelectorAll(".slide");
+//   let currentSlide = 0;
+//   let isPlaying = false;
+//   let isScrolling = false;
+
+//   // Initialize the first slide
+//   slides[currentSlide].classList.add("active");
+
+//   // Function to change slides and trigger video playback
+//   const changeSlide = (direction) => {
+//     if (isScrolling) return; // Prevent multiple triggers during scroll
+//     isScrolling = true;
+
+//     // Exit the current slide
+//     if (direction === "up") {
+//       slides[currentSlide].classList.add("exit-up");
+//     } else {
+//       slides[currentSlide].classList.add("exit-down");
+//     }
+
+//     setTimeout(() => {
+//       slides.forEach((slide) =>
+//         slide.classList.remove("active", "exit-up", "exit-down")
+//       );
+
+//       // Update current slide based on scroll direction
+//       if (direction === "up") {
+//         currentSlide--;
+//         if (currentSlide < 0) currentSlide = 0;
+//       } else {
+//         currentSlide++;
+//         if (currentSlide >= slides.length) currentSlide = slides.length - 1;
+//       }
+
+//       // Set the new slide as active
+//       slides[currentSlide].classList.add("active");
+
+//       // Play the corresponding video segment for the new slide
+//       playVideoSegmentForSlide(currentSlide);
+
+//       isScrolling = false;
+//     }, 500); // Adjust to match your slide transition timing
+//   };
+
+//   // Function to play video segment based on the current slide
+//   const playVideoSegmentForSlide = (slideIndex) => {
+//     if (isPlaying) return; // Prevent overlapping video playbacks
+
+//     const currentSlide = slides[slideIndex];
+//     const startTime = parseFloat(currentSlide.getAttribute("data-start"));
+//     const endTime = parseFloat(currentSlide.getAttribute("data-end"));
+
+//     // Play video segment corresponding to the active slide
+//     isPlaying = true;
+//     video.currentTime = startTime;
+//     video.play();
+
+//     const pauseVideoAtEndTime = function () {
+//       if (video.currentTime >= endTime) {
+//         video.pause();
+//         video.removeEventListener("timeupdate", pauseVideoAtEndTime);
+//         isPlaying = false;
+//       }
+//     };
+
+//     video.addEventListener("timeupdate", pauseVideoAtEndTime);
+//   };
+
+//   // Listen for scroll events
+//   let scrollTimeout = null;
+//   window.addEventListener("wheel", (e) => {
+//     if (scrollTimeout) clearTimeout(scrollTimeout);
+
+//     // Debounce scroll events
+//     scrollTimeout = setTimeout(() => {
+//       if (e.deltaY > 0) {
+//         changeSlide("down"); // Scroll down
+//       } else {
+//         changeSlide("up"); // Scroll up
+//       }
+//     }, 150); // Adjust debounce time as needed
+//   });
+
+//   // Initialize the first video segment for the first slide
+//   playVideoSegmentForSlide(0);
+// });
+
+/////////
+
+// document.addEventListener("DOMContentLoaded", function () {
+//   const video = document.getElementById("background-video");
+//   const slides = document.querySelectorAll(".slide");
+//   let currentSlide = 0;
+//   let isPlaying = false;
+//   let isScrolling = false;
+
+//   // Initialize the first slide
+//   slides[currentSlide].classList.add("active");
+
+//   // Function to change slides and trigger video playback
+//   const changeSlide = (direction) => {
+//     if (isScrolling) return; // Prevent multiple triggers during scroll
+//     isScrolling = true;
+
+//     // Exit the current slide
+//     if (direction === "up") {
+//       slides[currentSlide].classList.add("exit-up");
+//     } else {
+//       slides[currentSlide].classList.add("exit-down");
+//     }
+
+//     setTimeout(() => {
+//       slides.forEach((slide) =>
+//         slide.classList.remove("active", "exit-up", "exit-down")
+//       );
+
+//       // Update current slide based on scroll direction
+//       if (direction === "up") {
+//         currentSlide--;
+//         if (currentSlide < 0) currentSlide = 0;
+//       } else {
+//         currentSlide++;
+//         if (currentSlide >= slides.length) currentSlide = slides.length - 1;
+//       }
+
+//       // Set the new slide as active
+//       slides[currentSlide].classList.add("active");
+
+//       // Play or pause video based on scroll direction
+//       if (direction === "down") {
+//         playVideoSegmentForSlide(currentSlide); // Play video when moving down
+//       } else {
+//         pauseVideoAndShowFrame(currentSlide); // Pause video and show last frame when moving up
+//       }
+
+//       isScrolling = false;
+//     }, 500); // Adjust to match your slide transition timing
+//   };
+
+//   // Function to pause the video and show the last frame of the current slide
+//   const pauseVideoAndShowFrame = (slideIndex) => {
+//     const currentSlide = slides[slideIndex];
+//     const endTime = parseFloat(currentSlide.getAttribute("data-end"));
+
+//     // Pause the video
+//     video.pause();
+//     isPlaying = false; // Mark video as not playing
+
+//     // Set the current time to the end time to show the last frame of that slide
+//     video.currentTime = endTime;
+//   };
+
+//   // Function to play video segment based on the current slide
+//   const playVideoSegmentForSlide = (slideIndex) => {
+//     if (isPlaying) return; // Prevent overlapping video playbacks
+
+//     const currentSlide = slides[slideIndex];
+//     const startTime = parseFloat(currentSlide.getAttribute("data-start"));
+//     const endTime = parseFloat(currentSlide.getAttribute("data-end"));
+
+//     // Play video segment corresponding to the active slide
+//     isPlaying = true;
+//     video.currentTime = startTime; // Start the video at the slide's start time
+//     video.play();
+
+//     const pauseVideoAtEndTime = function () {
+//       if (video.currentTime >= endTime) {
+//         video.pause();
+//         video.removeEventListener("timeupdate", pauseVideoAtEndTime);
+//         isPlaying = false;
+//       }
+//     };
+
+//     video.addEventListener("timeupdate", pauseVideoAtEndTime);
+//   };
+
+//   // Listen for scroll events
+//   let scrollTimeout = null;
+//   window.addEventListener("wheel", (e) => {
+//     if (scrollTimeout) clearTimeout(scrollTimeout);
+
+//     // Debounce scroll events
+//     scrollTimeout = setTimeout(() => {
+//       if (e.deltaY > 0) {
+//         changeSlide("down"); // Scroll down
+//       } else {
+//         changeSlide("up"); // Scroll up
+//       }
+//     }, 150); // Adjust debounce time as needed
+//   });
+
+//   // Initialize the first video segment for the first slide
+//   playVideoSegmentForSlide(0);
+// });
+
 document.addEventListener("DOMContentLoaded", function () {
   const video = document.getElementById("background-video");
-  const slides = document.querySelectorAll(".section-one-slider .slide");
-  let currentIndex = -1;
-  let isPlaying = false;
+  const slides = document.querySelectorAll(".slide");
+  const header = document.querySelector("header");
+  const bottomText = document.getElementById("section-bottom-text");
+  const bottomCont = document.querySelector(".section-one-bottom-outer");
 
-  // Function to play video segments based on slide
-  function playVideoSegment(startTime, endTime) {
+  const slideTexts = [
+    "Revolutionize your real estate experience with seamless, tech-driven solutions by Realezi. From first-time buyers to professional sellers, we make your journey from click to close effortless.",
+    "We design your dream home! From initial planning to designing and final touches, we build a perfect home just as you like it.",
+    "Be it residential or non-residential. Enjoy our end-to-end expert design solutions to transform and enhance your space tailored to your style.",
+    "Leave the complexities of home financing behind. With us by your side, from home loan application to the disbursement process, you can secure the right loan at low interest rates.",
+    "Anyone can do this job but not everyone can be us. We are your partners in all things legal- from due diligence, to lease agreements and much more. ",
+    "Harness the Sun for sustainability. Go green with us with the best rooftop solar systems at the best prices.",
+    "Let us take care of the heavy lifting (literally!). Relocating is made easy with our guarantee of safe delivery.",
+  ];
+
+  let currentSlide = 0;
+  let isPlaying = false;
+  let isScrolling = false;
+  let isHeaderFixed = false;
+
+  document.body.classList.add("overflow-hidden");
+
+  slides[currentSlide].classList.add("active");
+
+  const changeSlide = (direction) => {
+    // Check if the current slide is the last one
+    // Check if the user is scrolling and the conditions for the current slide
+    if (
+      isScrolling ||
+      (currentSlide === slides.length - 1 && direction === "down") ||
+      (direction === "up" && isHeaderFixed) // New condition added here
+    ) {
+      return;
+    }
+    isScrolling = true;
+
+    if (direction === "up") {
+      slides[currentSlide].classList.add("exit-up");
+    } else {
+      slides[currentSlide].classList.add("exit-down");
+    }
+
+    setTimeout(() => {
+      slides.forEach((slide) =>
+        slide.classList.remove("active", "exit-up", "exit-down")
+      );
+
+      if (direction === "up") {
+        currentSlide--;
+        if (currentSlide < 0) currentSlide = 0;
+      } else {
+        currentSlide++;
+        if (currentSlide >= slides.length) currentSlide = slides.length - 1;
+      }
+
+      // Only update if not at the last slide
+      if (currentSlide <= slides.length - 1) {
+        slides[currentSlide].classList.add("active");
+        bottomText.innerHTML = slideTexts[currentSlide];
+        bottomCont.style.animation = "slideUp 0.5s ease-in-out";
+
+        setTimeout(() => {
+          bottomCont.style.animation = "";
+        }, 500);
+
+        if (direction === "down") {
+          playVideoSegmentForSlide(currentSlide);
+        } else {
+          pauseVideoAndShowFrame(currentSlide);
+        }
+      } else {
+        // Keep the last slide active if it's the last one
+        slides[slides.length - 1].classList.add("active");
+      }
+
+      isScrolling = false;
+    }, 500);
+  };
+
+  const pauseVideoAndShowFrame = (slideIndex) => {
+    const currentSlide = slides[slideIndex];
+    const endTime = parseFloat(currentSlide.getAttribute("data-end"));
+
+    video.pause();
+    isPlaying = false;
+    video.currentTime = endTime;
+  };
+
+  const playVideoSegmentForSlide = (slideIndex) => {
+    if (isPlaying) return;
+    const currentSlide = slides[slideIndex];
+    const startTime = parseFloat(currentSlide.getAttribute("data-start"));
+    const endTime = parseFloat(currentSlide.getAttribute("data-end"));
+
     isPlaying = true;
     video.currentTime = startTime;
     video.play();
@@ -267,88 +414,44 @@ document.addEventListener("DOMContentLoaded", function () {
     };
 
     video.addEventListener("timeupdate", pauseVideoAtEndTime);
-  }
+  };
 
-  // Function to handle slide changes
-  function handleSlideChange(newIndex) {
-    if (newIndex !== currentIndex && !isPlaying) {
-      currentIndex = newIndex;
-      const currentSlide = slides[currentIndex];
-      const startTime = parseFloat(currentSlide.getAttribute("data-start"));
-      const endTime = parseFloat(currentSlide.getAttribute("data-end"));
-
-      playVideoSegment(startTime, endTime);
-    }
-  }
-
-  // Intersection Observer to detect visible slides
-  function initSlideObserver() {
-    if ("IntersectionObserver" in window) {
-      const slideObserver = new IntersectionObserver(
-        (entries) => {
-          entries.forEach((entry) => {
-            if (entry.isIntersecting) {
-              const index = Array.from(slides).indexOf(entry.target);
-              handleSlideChange(index);
-            }
-          });
-        },
-        { threshold: 0.2 } // Trigger when 20% of the slide is visible
-      );
-
-      slides.forEach((slide) => {
-        slideObserver.observe(slide);
+  // Use IntersectionObserver to detect when header touches the top of the viewport
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (!entry.isIntersecting && currentSlide < slides.length - 1) {
+          document.body.classList.add("overflow-hidden");
+          isHeaderFixed = true;
+        } else {
+          document.body.classList.remove("overflow-hidden");
+          isHeaderFixed = false;
+        }
       });
-    }
-  }
+    },
+    { threshold: 0 }
+  );
+  observer.observe(header);
 
-  // Initialize the slide observer
-  initSlideObserver();
+  let scrollTimeout = null;
+  window.addEventListener("wheel", (e) => {
+    if (scrollTimeout) clearTimeout(scrollTimeout);
 
-  // Throttle function for performance optimization
-  function throttle(func, limit) {
-    let lastFunc;
-    let lastRan;
-    return function () {
-      const context = this;
-      const args = arguments;
-      if (!lastRan) {
-        func.apply(context, args);
-        lastRan = Date.now();
+    scrollTimeout = setTimeout(() => {
+      if (e.deltaY > 0) {
+        changeSlide("down");
       } else {
-        clearTimeout(lastFunc);
-        lastFunc = setTimeout(function () {
-          if (Date.now() - lastRan >= limit) {
-            func.apply(context, args);
-            lastRan = Date.now();
-          }
-        }, limit - (Date.now() - lastRan));
+        changeSlide("up");
       }
-    };
-  }
 
-  // Fallback scroll-based visibility detection if IntersectionObserver is not supported
-  function checkSlideVisibility() {
-    const sliderRect = document
-      .querySelector(".section-one-slider")
-      .getBoundingClientRect();
-    slides.forEach((slide, index) => {
-      const h1 = slide.querySelector("h1");
-      const h1Rect = h1.getBoundingClientRect();
-
-      if (h1Rect.bottom > sliderRect.top && h1Rect.top < sliderRect.bottom) {
-        handleSlideChange(index);
+      // Ensure the overflow is hidden when header is fixed and slide is not the last one
+      if (currentSlide < slides.length - 1) {
+        document.body.classList.add("overflow-hidden");
+      } else {
+        document.body.classList.remove("overflow-hidden");
       }
-    });
-  }
+    }, 60);
+  });
 
-  const throttledCheckSlideVisibility = throttle(checkSlideVisibility, 100);
-
-  // Add scroll event listener as a fallback
-  document
-    .querySelector(".section-one-slider")
-    .addEventListener("scroll", throttledCheckSlideVisibility);
+  playVideoSegmentForSlide(0);
 });
-
-// Initial playback for the first slide
-handleSlideChange(0);

@@ -413,6 +413,10 @@ body::-webkit-scrollbar {
   position: relative;
 }
 
+.section-one .container {
+  overflow: hidden;
+}
+
 .section-one h1 {
   font-size: 3.5rem !important;
   font-weight: 400 !important;
@@ -459,7 +463,7 @@ body::-webkit-scrollbar {
   object-fit: fill;
   z-index: -1;
 }
-
+/* 
 .section-one-slider {
   overflow-y: auto;
   width: 100%;
@@ -477,6 +481,40 @@ body::-webkit-scrollbar {
   color: white;
   box-sizing: border-box;
   padding: 20px;
+} */
+
+.section-one-slider {
+  position: relative;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #fff;
+}
+
+.slide {
+  position: absolute;
+  top: 40%;
+  width: max-content;
+  left: 10%;
+  transform: translateY(50px);
+  opacity: 0;
+  transition: transform 0.5s ease, opacity 0.5s ease;
+}
+
+.slide.active {
+  transform: translateY(0);
+  opacity: 1;
+}
+
+.slide.exit-up {
+  transform: translateY(50px);
+  opacity: 0;
+}
+
+.slide.exit-down {
+  transform: translateY(-50px);
+  opacity: 0;
 }
 
 .slide h1 {
@@ -492,6 +530,7 @@ body::-webkit-scrollbar {
   z-index: 3;
   position: relative;
 }
+
 .section-one-bottom-outer {
   border-top: 1px solid #ffffff50;
   position: relative;
@@ -808,6 +847,7 @@ body::-webkit-scrollbar {
   overflow: hidden;
   border-right: 2px solid;
   width: max-content;
+  height: 55px;
 }
 
 @keyframes blink {
@@ -2704,6 +2744,10 @@ input[type="range"]::-webkit-slider-thumb {
   border-top-right-radius: 50px;
   position: relative;
   padding: 55px 10px 20px 10px;
+}
+
+.footer .container {
+  max-width: 1120px;
 }
 
 .footer .upper-footer ul {

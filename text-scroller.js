@@ -13,7 +13,7 @@ const tl = gsap.timeline({
 
 tl.fromTo(
   ".text-scroller",
-  { yPercent: 110, opacity: 0 },
+  { yPercent: 110, opacity: 1 },
   {
     yPercent: -190,
     opacity: 1,
@@ -35,14 +35,14 @@ tl.to(
 tl.fromTo(
   ".section-seven h3",
   {
-    opacity: 0,
+    opacity: 1,
     yPercent: 100,
   },
   {
     opacity: 1,
     yPercent: 0,
     ease: "none",
-    duration: 5,
+    duration: 2,
   },
   "-=5"
 );
