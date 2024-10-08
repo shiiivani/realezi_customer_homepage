@@ -183,6 +183,16 @@
                     <source src="./videos/main-video.mp4" type="video/mp4">
                     Your browser does not support HTML5 video.
                 </video> -->
+                <a href="#section-two" class="skip-btn-container">
+                    <button class="skip-btn">
+                        SKIP
+                        <svg viewBox="0 0 320 512" class="svg">
+                            <path
+                                d="M52.5 440.6c-9.5 7.9-22.8 9.7-34.1 4.4S0 428.4 0 416V96C0 83.6 7.2 72.3 18.4 67s24.5-3.6 34.1 4.4l192 160L256 241V96c0-17.7 14.3-32 32-32s32 14.3 32 32V416c0 17.7-14.3 32-32 32s-32-14.3-32-32V271l-11.5 9.6-192 160z">
+                            </path>
+                        </svg>
+                    </button>
+                </a>
                 <div class="section-one-container">
                     <div class="section-one-slider">
                         <div class="slide" data-start="0" data-end="6.5">
@@ -207,6 +217,7 @@
                             <h1 id="slide-7">Packers & Movers<br> Services</h1>
                         </div>
                     </div>
+
                 </div>
                 <div class="section-one-bottom-outer">
                     <div class="section-one-bottom d-flex align-items-center justify-content-between">
@@ -440,7 +451,7 @@
             </div>
         </div>
 
-        <div class="section-two d-none d-sm-block text-center">
+        <div id="section-two" class="section-two d-none d-sm-block text-center">
             <div class="container">
                 <div class="section-two-nav">
                     <ul>
@@ -1458,11 +1469,12 @@
         <div class="container">
             <div class="upper-footer">
                 <div class="columns d-flex align-items-start justify-content-between my-3">
-                    <div>
+                    <div style="margin-right: 10px">
                         <img src="./images/logo2.png" width="150px" class="mb-3" />
                         <h3>
-                            Connecting You to Your<br />
-                            Dream Property.
+                            Click.<br>
+                            Connect.<br>
+                            Close.<br>
                         </h3>
                         <button class="white-btn">Try it yourself</button>
                     </div>

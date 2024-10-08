@@ -154,12 +154,12 @@ document.addEventListener("DOMContentLoaded", function () {
   const typewriterElements = document.querySelectorAll("#typewriter-text");
   const sentences = [
     "Real Estate Made Easy",
-    "Click-Connect-Close",
+    "Click.Connect.Close.",
     "Buying Made Easy",
     "Architectural Service Made Easy",
     "Selling Made Easy",
     "Interior Designing Made Easy",
-    "Add On Services Made Easy",
+    "Bank Loan Made Easy",
   ];
 
   // Create an array to track state for each typewriter

@@ -509,6 +509,59 @@ body::-webkit-scrollbar {
   animation-fill-mode: both;
 }
 
+/* From Uiverse.io by vinodjangid07 */
+.skip-btn-container {
+  position: absolute;
+  right: 5%;
+  bottom: 25%;
+  z-index: 900;
+  text-decoration: none;
+}
+.skip-btn {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  width: 100px;
+  height: 40px;
+  border: none;
+  padding: 0px 20px;
+  background: #ffffff;
+  color: #111f3c;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  border-radius: 12px;
+  box-shadow: 0 20px 30px -7px rgba(97, 118, 238, 0.5);
+  transition-duration: 0.3s;
+}
+
+.skip-btn .svg {
+  width: 12px;
+  position: absolute;
+  right: 0;
+  margin-right: 20px;
+  fill: #111f3c;
+  transition-duration: 0.3s;
+}
+
+.skip-btn:hover {
+  color: transparent;
+}
+
+.skip-btn:hover svg {
+  right: 43%;
+  margin: 0;
+  padding: 0;
+  border: none;
+  transition-duration: 0.3s;
+}
+
+.skip-btn:active {
+  transform: translate(3px, 3px);
+  transition-duration: 0.3s;
+}
+
 @keyframes slideUp {
   0% {
     transform: translateY(20px);
