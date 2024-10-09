@@ -116,7 +116,8 @@ document.addEventListener("DOMContentLoaded", function () {
   );
   const arrowIcon = dropdownLabel.querySelector("img");
 
-  dropdownLabel.addEventListener("click", function () {
+  // Function to toggle dropdown
+  function toggleDropdown() {
     const screenWidth = window.innerWidth;
     if (screenWidth <= 767) {
       dropdownOptions.classList.toggle("active");
@@ -126,16 +127,42 @@ document.addEventListener("DOMContentLoaded", function () {
       dropdownContent.classList.toggle("active");
     }
     arrowIcon.classList.toggle("rotate");
+  }
+
+  // Function to close dropdown
+  function closeDropdown() {
+    dropdownOptions.classList.remove("active");
+    dropdownContent.classList.remove("active");
+    dropdownLabel.classList.remove("active");
+    arrowIcon.classList.remove("rotate");
+  }
+
+  dropdownLabel.addEventListener("click", function (event) {
+    event.stopPropagation(); // Prevent event from triggering document click listener
+    toggleDropdown();
   });
 
   dropdownOptions.addEventListener("click", function (event) {
     if (event.target.tagName === "LI") {
       const selectedOption = event.target.textContent;
       dropdownLabel.querySelector("p").textContent = selectedOption;
-      dropdownOptions.classList.remove("active");
-      arrowIcon.classList.remove("rotate");
+      closeDropdown(); // Close dropdown after selection
     }
   });
+
+  // Close dropdown if clicked outside, but ignore clicks on range sliders
+  document.addEventListener("click", function (event) {
+    // Check if the click is outside the dropdown and not on sliders
+    if (
+      !dropdownLabel.contains(event.target) && // Click outside the label
+      !dropdownOptions.contains(event.target) && // Click outside the options
+      !dropdownContent.contains(event.target) // Click outside the content, including sliders
+    ) {
+      closeDropdown();
+    }
+  });
+
+  // Slider logic for min and max sliders
   const minSlider = document.getElementById("minSlider1");
   const maxSlider = document.getElementById("maxSlider1");
   const minValueDisplay = document.getElementById("minValue1");
@@ -180,10 +207,12 @@ document.addEventListener("DOMContentLoaded", function () {
     const options = dropdown.querySelector(".dropdown-options");
     const listItems = dropdown.querySelectorAll("li");
 
-    button.addEventListener("click", () => {
+    button.addEventListener("click", (event) => {
+      event.stopPropagation();
       options.classList.toggle("active");
       button.classList.toggle("active");
     });
+
     listItems.forEach((item) => {
       item.addEventListener("click", function () {
         listItems.forEach((li) => li.classList.remove("selected"));
@@ -191,6 +220,13 @@ document.addEventListener("DOMContentLoaded", function () {
         options.classList.remove("active");
         button.querySelector("p").textContent = item.textContent;
       });
+    });
+
+    document.addEventListener("click", function (event) {
+      if (!dropdown.contains(event.target)) {
+        options.classList.remove("active");
+        button.classList.remove("active");
+      }
     });
   });
 });

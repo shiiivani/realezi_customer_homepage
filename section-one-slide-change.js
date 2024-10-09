@@ -26,7 +26,6 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
   function handleSlideChange(newIndex) {
-    console.log(newIndex);
     if (newIndex !== currentIndex) {
       currentIndex = newIndex;
 
