@@ -5,6 +5,7 @@ document.addEventListener("DOMContentLoaded", function () {
     let currentIndex = -1;
     let isPlaying = false;
 
+    // Function to prevent scrolling
     const preventScroll = (e) => {
       const exceptionButton = document.querySelector(".skip-btn");
       if (e.target === exceptionButton || exceptionButton.contains(e.target)) {
@@ -15,16 +16,30 @@ document.addEventListener("DOMContentLoaded", function () {
       return false;
     };
 
-    window.addEventListener("wheel", preventScroll, { passive: false });
-    window.addEventListener("touchmove", preventScroll, { passive: false });
-    window.addEventListener("keydown", preventScroll);
-
-    setTimeout(() => {
+    // Function to enable scrolling and remove event listeners
+    const enableScroll = () => {
       window.removeEventListener("wheel", preventScroll);
       window.removeEventListener("touchmove", preventScroll);
       window.removeEventListener("keydown", preventScroll);
       document.body.style.overflow = "auto";
+    };
+
+    // Disable scrolling for the first 5 seconds
+    window.addEventListener("wheel", preventScroll, { passive: false });
+    window.addEventListener("touchmove", preventScroll, { passive: false });
+    window.addEventListener("keydown", preventScroll);
+
+    // Set timeout to enable scroll after 5 seconds
+    const scrollTimeout = setTimeout(() => {
+      enableScroll();
     }, 6000);
+
+    // Add a click event listener to the skip button to immediately enable scroll
+    const skipButton = document.querySelector(".skip-btn");
+    skipButton.addEventListener("click", () => {
+      clearTimeout(scrollTimeout); // Cancel the 5-second timer
+      enableScroll(); // Enable scrolling immediately
+    });
 
     function playVideoSegment(startTime, endTime) {
       isPlaying = true;
