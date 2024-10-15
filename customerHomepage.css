@@ -992,7 +992,6 @@ body::-webkit-scrollbar {
   position: relative;
   top: -76px;
   padding-top: 10px;
-  padding-bottom: 60px;
   z-index: 5;
   background-color: #ffffff;
 }
@@ -2363,6 +2362,10 @@ input[type="range"]::-webkit-slider-thumb {
   margin-right: 20px;
 }
 
+.section-six-mobile-view .tools-card .content p {
+  font-size: 0.8rem;
+}
+
 /* Section seven */
 .section-seven {
   /* border-bottom-left-radius: 50px;
@@ -2734,17 +2737,17 @@ input[type="range"]::-webkit-slider-thumb {
   border-radius: 20px;
   border: 1px solid #111f3c;
   box-shadow: 0px 4px 16px 0px #0000001a;
-  margin: 20px;
+  margin: 40px;
   position: relative;
   flex: 0 0 auto;
-  width: 380px;
+  width: 330px;
 }
 
 .customer-review-slider .customer-review-card img {
   position: absolute;
-  top: -20px;
+  top: -30px;
   left: 40%;
-  border: 1.5px solid #fff;
+  /* border: 1.5px solid #fff; */
 }
 
 .customer-review-slider .customer-review-card p:nth-child(2) {
@@ -3248,6 +3251,9 @@ input[type="range"]::-webkit-slider-thumb {
 }
 
 @media screen and (max-width: 767px) {
+  .skip-btn-container {
+    bottom: 30%;
+  }
   .section-one-bottom {
     padding: 5px 20px 0 20px;
   }
