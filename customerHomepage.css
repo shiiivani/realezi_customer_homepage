@@ -1911,7 +1911,12 @@ input[type="range"]::-webkit-slider-thumb {
   position: absolute;
   opacity: 0;
   transition: opacity 1s, transform 1s;
-  width: 100px;
+  width: 150px;
+}
+
+.animated-box .brand-img.arrow,
+.reverse-animated-box .brand-img.arrow {
+  width: 80px;
 }
 
 .animated-box .brand-img.active,
@@ -1981,7 +1986,7 @@ input[type="range"]::-webkit-slider-thumb {
     opacity: 1;
   }
   100% {
-    transform: translateY(250%);
+    transform: translateY(350%);
     opacity: 1;
   }
 }
