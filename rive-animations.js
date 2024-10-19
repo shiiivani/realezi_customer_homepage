@@ -65,44 +65,44 @@ const riveConfigs = {
 };
 
 // Create an Intersection Observer to defer loading of animations
-const observer = new IntersectionObserver(
-  (entries, observer) => {
-    entries.forEach((entry) => {
-      if (entry.isIntersecting) {
-        const canvasId = entry.target.id;
-        const config = riveConfigs[canvasId];
+// const observer = new IntersectionObserver(
+//   (entries, observer) => {
+//     entries.forEach((entry) => {
+//       if (entry.isIntersecting) {
+//         const canvasId = entry.target.id;
+//         const config = riveConfigs[canvasId];
 
-        if (config && !riveAnimations[canvasId]) {
-          // Load the Rive animation when the element becomes visible
-          riveAnimations[canvasId] = loadRiveAnimation(
-            canvasId,
-            config.src,
-            config.id
-          );
+//         if (config && !riveAnimations[canvasId]) {
+//           // Load the Rive animation when the element becomes visible
+//           riveAnimations[canvasId] = loadRiveAnimation(
+//             canvasId,
+//             config.src,
+//             config.id
+//           );
 
-          // Add event listeners to handle click events
-          addEventListeners(canvasId);
+//           // Add event listeners to handle click events
+//           addEventListeners(canvasId);
 
-          // Stop observing once the animation has been loaded
-          observer.unobserve(entry.target);
-        }
-      }
-    });
-  },
-  {
-    root: null, // Viewport is the root
-    rootMargin: "0px",
-    threshold: 0.1, // Trigger when 10% of the element is visible
-  }
-);
+//           // Stop observing once the animation has been loaded
+//           observer.unobserve(entry.target);
+//         }
+//       }
+//     });
+//   },
+//   {
+//     root: null, // Viewport is the root
+//     rootMargin: "0px",
+//     threshold: 0.1, // Trigger when 10% of the element is visible
+//   }
+// );
 
-// Observe each canvas element
-Object.values(riveConfigs).forEach((config) => {
-  const canvasElement = document.getElementById(config.id);
-  if (canvasElement) {
-    observer.observe(canvasElement);
-  }
-});
+// // Observe each canvas element
+// Object.values(riveConfigs).forEach((config) => {
+//   const canvasElement = document.getElementById(config.id);
+//   if (canvasElement) {
+//     observer.observe(canvasElement);
+//   }
+// });
 
 document.getElementById("rent-btn").addEventListener("click", () => {
   riveAnimations.pg.cleanup();
