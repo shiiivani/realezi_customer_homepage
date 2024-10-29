@@ -114,6 +114,9 @@ document.addEventListener("DOMContentLoaded", function () {
   const dropdownContent = document.querySelector(
     ".budget-dropdown .dropdown-content"
   );
+  const propertyDropdown = document.querySelector(
+    ".property-dropdown .dropdown-options"
+  );
   const arrowIcon = dropdownLabel.querySelector("img");
 
   // Function to toggle dropdown
@@ -138,8 +141,9 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
   dropdownLabel.addEventListener("click", function (event) {
-    event.stopPropagation(); // Prevent event from triggering document click listener
+    event.stopPropagation();
     toggleDropdown();
+    propertyDropdown.classList.remove("active");
   });
 
   dropdownOptions.addEventListener("click", function (event) {
@@ -154,9 +158,9 @@ document.addEventListener("DOMContentLoaded", function () {
   document.addEventListener("click", function (event) {
     // Check if the click is outside the dropdown and not on sliders
     if (
-      !dropdownLabel.contains(event.target) && // Click outside the label
-      !dropdownOptions.contains(event.target) && // Click outside the options
-      !dropdownContent.contains(event.target) // Click outside the content, including sliders
+      !dropdownLabel.contains(event.target) &&
+      !dropdownOptions.contains(event.target) &&
+      !dropdownContent.contains(event.target)
     ) {
       closeDropdown();
     }
@@ -256,6 +260,9 @@ const propertyOptions = {
 const selectedPropertyType = document.querySelector(
   ".property-dropdown .dropdown-label p"
 );
+const Budgetdropdown = document.querySelector(
+  ".budget-dropdown .dropdown-content"
+);
 
 function populateDropdownOptions(options) {
   const dropdownOptions = document.querySelector(
@@ -307,6 +314,7 @@ function handleCanvasClick(canvas) {
 
 const dropdownButton = document.getElementById("dropdown-button");
 dropdownButton.addEventListener("click", function (event) {
+  Budgetdropdown.classList.remove("active");
   dropdownButton.querySelector("img").classList.toggle("rotate");
   if (this.disabled) {
     event.preventDefault();
@@ -470,7 +478,7 @@ document.addEventListener("DOMContentLoaded", function () {
   window.addEventListener("scroll", function () {
     if (window.scrollY >= navInitialOffsetTop) {
       nav.classList.add("fixed");
-      sectionTwoHeader.style.marginTop = "85px";
+      sectionTwoHeader.style.setProperty("margin-top", "85px", "important");
     } else {
       nav.classList.remove("fixed");
       sectionTwoHeader.style.marginTop = "15px";

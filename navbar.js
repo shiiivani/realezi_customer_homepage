@@ -75,7 +75,7 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   mainDropdownItems.forEach((item) => {
-    item.addEventListener("mouseenter", () => {
+    item.addEventListener("click", () => {
       const type = item.getAttribute("data-type");
       const activeDropdown = document.querySelector(
         `.resource-side-dropdown[data-type="${type}"]`
