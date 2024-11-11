@@ -449,6 +449,16 @@ body::-webkit-scrollbar {
   z-index: 3;
 }
 
+#video-placeholder {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: fill;
+  z-index: 4;
+}
+
 #background-video {
   position: absolute;
   top: 0;
@@ -508,7 +518,7 @@ body::-webkit-scrollbar {
   bottom: 100px;
   margin-left: auto;
   margin-right: auto;
-  z-index: 3;
+  z-index: 5;
   position: relative;
   animation-duration: 0.5s;
   animation-fill-mode: both;
@@ -1714,8 +1724,9 @@ input[type="range"]::-webkit-slider-thumb {
   font-size: 0.7rem;
   white-space: nowrap;
   position: absolute;
-  right: 15px;
+  right: 12px;
   bottom: 0;
+  text-decoration: underline !important;
 }
 
 .short-text-outer {
@@ -3215,9 +3226,6 @@ input[type="range"]::-webkit-slider-thumb {
   .search-container .property-dropdown {
     display: none;
   }
-  .larger-screen-categories {
-    display: none;
-  }
   .smaller-screen-categories {
     margin-bottom: 30px;
   }
@@ -3423,7 +3431,7 @@ input[type="range"]::-webkit-slider-thumb {
     background-color: #111f3c;
     border-bottom-right-radius: 30px;
     border-bottom-left-radius: 30px;
-    border-bottom: 0.7px solid #395689;
+    /* border-bottom: 0.7px solid #395689; */
     z-index: 100;
   }
   .nav .lower-nav ul li {
