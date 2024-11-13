@@ -3496,7 +3496,7 @@ input[type="range"]::-webkit-slider-thumb {
     margin: 0;
   }
   .footer .upper-footer .columns > div ul.active {
-    max-height: 260px;
+    max-height: 315px;
   }
   .footer .upper-footer .columns > div:last-child li:last-child {
     width: 100%;

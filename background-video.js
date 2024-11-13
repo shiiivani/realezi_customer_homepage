@@ -199,8 +199,8 @@ document.addEventListener("DOMContentLoaded", function () {
     // Add a click event listener to the skip button to immediately enable scroll
     const skipButton = document.querySelector(".skip-btn");
     skipButton.addEventListener("click", () => {
-      clearTimeout(scrollTimeout); // Cancel the 5-second timer
-      enableScroll(); // Enable scrolling immediately
+      clearTimeout(scrollTimeout);
+      enableScroll();
     });
 
     function playVideoSegment(startTime, endTime) {
